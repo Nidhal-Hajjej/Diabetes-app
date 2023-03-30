@@ -24,11 +24,19 @@
             <div class="message-patient-heading">
                 <h3>Patients</h3>
             </div>
-            {{-- {{#each messages}} --}}
+            
+            @foreach ($patients as $patient)
             <div class="message-patient-contact">
-                {{-- <p>{{@key}}</p> --}}
+                {{ $patient->name}}
             </div>
+            @endforeach
+            
+            {{-- {{#each messages}} --}}
+            {{-- <div class="message-patient-contact"> --}}
+                {{-- <p>{{@key}}</p> --}}
+            {{-- </div> --}}
             {{-- {{/each}} --}}
+        
         </div>
         <div class="support-message-main flex-column-center">
 
@@ -40,7 +48,7 @@
                 <p id="msg-recipient">Select a patient to view and update messages.</p>
                 <div class="msg-bubble msg-bubble-left">
                     <h3>Dr.
-                         {{-- {{clinician.first_name}} --}}
+                         {{-- {{clinician.name}} --}}
                         </h3>
                 </div>
             </div>

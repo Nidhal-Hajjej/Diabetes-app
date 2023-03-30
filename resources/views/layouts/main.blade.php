@@ -61,7 +61,7 @@
     </main> 
     <footer id="footer"> 
         <a href="#" class="logo"><span style="color:black">D</span>@H</a>
-        <p>Powered by INFO30005</p>
+        <p>Powered by Gwabsiya</p>
     </footer>
 </body>
 </html>
