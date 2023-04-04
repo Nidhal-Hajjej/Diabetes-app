@@ -76,10 +76,10 @@ Route::get('/patientDashboard', function () {
     return view('patientDashboard');
 });
 
-Route::resource('/', NoteController::class);
+Route::resource('/notes', NoteController::class);
 
-Route::get('/patientOverview', function () {
+// Route::get('/patientOverview', function () {
     
-    $notes = Note::latest()->paginate(5);
-    return view('patientOverview',compact('notes'));
-});
+//     $notes = Note::latest()->paginate(5);
+//     return view('patientOverview',compact('notes'));
+// });

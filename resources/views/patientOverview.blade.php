@@ -2,7 +2,7 @@
 
 @section('content')
     <script src="/scripts/closeFlash.js"></script>
-    <script src="/scripts/patientOverview.js"></script>
+    <script src="{{ asset ('/js/patientOverview.js') }}"></script>
     <script src="/scripts/patientDataFilter.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="/scripts/patientChart.js"></script>
@@ -103,16 +103,22 @@
                         <p>{{$note->comment}}</p>
                         <br>
                         <p>{{$note->date}}</p>
-                        <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
+                        {{-- <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
                         <form action="/clinician/manage-patient/{{$note->patientId}}/delete-note" method="post" class="note-del-form">
-                            <input type="hidden" value=
-                                {{$note->patientId}} 
-                                name="pid">
+                            <input type="hidden" value={{$note->patientId}} name="pid">
                             <input type="hidden" value=
                                 {{-- {{this._id}}  --}}
-                                name="nid">
+                                {{-- name="nid"> --}}
                             {{-- {{!-- <button type="submit" style="display: none;"></button> --}}
+                        {{-- </form>  --}}
+                        <form action="{{ route('notes.destroy',$note->id) }}" method="POST">
+
+                            @csrf
+                            @method('DELETE')
+                            
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        
                     </div>
                 @endforeach
                 {{-- {{/each}} --}}
@@ -125,7 +131,8 @@
                     <div id="dark-pink" class="note-option dark-pink"></div>
                     <div id="light-pink" class="note-option light-pink"></div>
                 </div>
-                <form action="/clinician/manage-patient/add-note" method="post">  
+                <form action= "{{ route('notes.store') }}" method="post">
+                    @csrf  
                     {{-- <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">   --}}
                     <input type="hidden" value= name="pid">
                     {{-- <input type="hidden" value={{patient._id}} name="pid"> --}}

@@ -16,11 +16,11 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('patientId');
+            $table->string('patientId')->default('12');
             $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('comment');
-            // $table->string('color')->default('dark-yellow');
-            $table->string('color');
+            $table->string('color')->default('dark-yellow');
+            // $table->string('color');
             $table->timestamps();
         });
     }

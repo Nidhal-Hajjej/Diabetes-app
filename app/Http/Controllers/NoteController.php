@@ -37,7 +37,14 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required',
+        ]);
+    
+        Note::create($request->all());
+     
+        return redirect()->route('notes.index')
+                        ->with('success','Product created successfully.');
     }
 
     /**
@@ -80,8 +87,11 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Note $note)
     {
-        //
+        $note->delete();
+    
+        return redirect()->route('notes.index')
+                        ->with('success','Note deleted successfully');
     }
 }
