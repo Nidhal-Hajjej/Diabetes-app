@@ -14,15 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100);
-            $table->string('gender', 100);
-            $table->string('email', 100)->unique();
-            $table->string('dob', 100);
+            $table->bigIncrements('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('screen_name');
+            $table->date('dob');
+            $table->text('bio');
+            $table->decimal('engagement_rate', 5, 2)->default(0);
+            $table->string('clinicianId');
+            $table->text('supportMessage')->nullable();
+            $table->json('measurements')->nullable();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

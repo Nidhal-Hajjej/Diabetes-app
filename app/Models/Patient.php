@@ -8,5 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'dob', 'gender','email'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'screen_name',
+        'dob',
+        'bio',
+        'engagement_rate',
+        'clinicianId',
+        'supportMessage',
+        'measurements',
+    ];
+
+    protected $casts = [
+        'measurements' => 'json',
+    ];
+
+    protected $table = 'patients';
 }

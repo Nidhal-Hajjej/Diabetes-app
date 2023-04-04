@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\NoteController;
+use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 
@@ -55,4 +57,29 @@ Route::get('/clinicianSupportMessage', function () {
 
 Route::get('/newPatient', function () {
     return view('newPatient');
+});
+
+Route::get('/individualSupportMessage', function () {
+
+    return view('individualSupportMessage');
+});
+
+Route::get('/notFound', function () {
+    return view('notFound');
+});
+
+Route::get('/patientComments', function () {
+    return view('patientComments');
+});
+
+Route::get('/patientDashboard', function () {
+    return view('patientDashboard');
+});
+
+Route::resource('/', NoteController::class);
+
+Route::get('/patientOverview', function () {
+    
+    $notes = Note::latest()->paginate(5);
+    return view('patientOverview',compact('notes'));
 });

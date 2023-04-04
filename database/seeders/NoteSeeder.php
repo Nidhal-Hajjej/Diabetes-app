@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Note;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class NoteSeeder extends Seeder
@@ -15,8 +15,14 @@ class NoteSeeder extends Seeder
      */
     public function run()
     {
-        Note::create([
-            'comment' => 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        ]);
+        $faker = Factory::create();
+
+        for ($i = 0; $i < 10; $i++) {
+            Note::create([
+                'patientId' =>$faker->randomDigit,
+                'comment' =>$faker->sentence,
+                'color' =>$faker->randomElement(['dark-yellow', 'light-yellow', 'dark-pink', 'light-pink']),    
+            ]);
+        };
     }
 }

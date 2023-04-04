@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
     use HasFactory;
-    protected $fillable = ['comment'];
+
+    protected $fillable = [
+        'patientId',
+        'date',
+        'comment',
+        'color',
+    ];
 }

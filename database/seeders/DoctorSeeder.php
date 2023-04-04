@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Doctor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class DoctorSeeder extends Seeder
@@ -15,12 +15,21 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        Doctor::create([
-            'name' => 'Doctor',
-            'gender' => 'male',
-            'email' => 'admin@gmail.com',
-            'dob'=> date('Y-m-d H:i:s'),
-            // 'password' => bcrypt('123456'),
-        ]);
+        $faker = Factory::create();
+
+        // Generate 5 random clinicians
+        for ($i = 0; $i < 5; $i++) {
+            $clinician = new Doctor();
+            $clinician->first_name = $faker->firstName;
+            $clinician->last_name = $faker->lastName;
+            $clinician->screen_name = $faker->optional()->userName;
+            $clinician->dob = $faker->optional()->date;
+            $clinician->patients = [
+                $faker->uuid,
+                $faker->uuid,
+                $faker->uuid,
+            ];
+            $clinician->save();
+        }
     }
 }
