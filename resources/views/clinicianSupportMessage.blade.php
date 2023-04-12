@@ -27,7 +27,7 @@
             
             @foreach ($patients as $patient)
             <div class="message-patient-contact">
-                {{ $patient->name}}
+                {{ $patient->first_name}}
             </div>
             @endforeach
             
