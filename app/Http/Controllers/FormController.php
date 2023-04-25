@@ -8,52 +8,70 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class FormController extends Controller
 {
-    public function processForm(Request $request)
+
+
+public function processForm(Request $request)
 {
     // Validate the form data
-    $validatedData = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8',
-    ])->validate();
+    $validatedData = $request->validate([
+    'first_name' => 'required|string|max:255',
+    'last_name' => 'required|string|max:255',
+    'email' => 'required|string|email|max:255|unique:users',
+    'password' => 'required|string|min:8',
+    
+]);
 
-    $role = ($request->has('patientSignup')) ? 'patient' : 'doctor';
+// if ($validatedData->fails()) {
+//     return redirect()->back()->withErrors($validatedData)->withInput();
+// }
 
-    // Save the form data to the database
-    $user = new User;
-    $user->name = $validatedData['name'];
-    $user->email = $validatedData['email'];
-    $user->password = Hash::make($validatedData['password']);
-    $user->save();
+$role = ($request->has('patientSignup')) ? 'patient' : 'doctor';
 
-    if ($role === 'patient') {
-        // Save data to the patients table
-        $patient = new Patient;
-        $patient->name = $validatedData['name'];
-        $patient->screen_name = ''; // Set screen_name to an empty string
-        $patient->dob = ''; // Set dob to an empty string
-        $patient->bio = ''; // Set bio to an empty string
-        $patient->engagement_rate = 0; // Set engagement_rate to 0
-        $patient->clinicianId = ''; // Set clinicianId to an empty string
-        $patient->supportMessage = ''; // Set supportMessage to an empty string
-        $patient->measurements = null; // Set measurements to null
-        $patient->save();
-    } else {
-        // Save data to the doctors table
-        $doctor = new Doctor;
-        $doctor->name = $validatedData['name'];
-        $doctor->screen_name = null; // Set screen_name to null
-        $doctor->dob = null; // Set dob to null
-        $doctor->patients = null; // Set patients to null
-        $doctor->save();
-    }
+// // Save the form data to the database
+$user = new User;
+$user->name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
+$user->email = $validatedData['email'];
+$user->password = Hash::make($validatedData['password']);
+$user->save();
 
-    // Redirect back to the form with a success message
-    return redirect('/login')->with('success', 'Form submitted successfully!');
+if ($role === 'patient') {
+    // Save data to the patients table
+    $patient = new Patient;
+    $patient->first_name = $validatedData['first_name'];
+    $patient->last_name = $validatedData['last_name'];
+    $patient->email = $validatedData['email'];
+    $patient->password = Hash::make($validatedData['password']);
+    $patient->screen_name = '';
+    $patient->dob = '';
+    $patient->bio = '';
+    $patient->engagement_rate = 0;
+    $patient->clinicianId = '';
+    $patient->supportMessage = '';
+    $patient->measurements = null;
+    $patient->save();
+} else {
+    // Save data to the doctors table
+    $doctor = new Doctor;
+    $doctor->first_name = $validatedData['first_name'];
+    $doctor->last_name = $validatedData['last_name'];
+    $doctor->email = $validatedData['email'];
+    $doctor->password = Hash::make($validatedData['password']);
+    $doctor->screen_name = null;
+    $doctor->dob = null;
+    $doctor->patients = null;
+    $doctor->save();
 }
+
+// Redirect back to the form with a success message
+return redirect('/login')->with('success', 'Form submitted successfully!');
+
+}
+
+
 
 
 }
