@@ -61,6 +61,7 @@
                 <input type="text" placeholder="Name" name="name"/>
                 <input type="email" placeholder="Email" name="email"/>
                 <input type="password" placeholder="Password" name="password"/>
+                <input type="hidden" name="role" value="patient">
                 <button type="submit">SignUp</button>
             </form>
         </div>
@@ -74,6 +75,7 @@
                 <input type="text" placeholder="Name" name="name"/>
                 <input type="email" placeholder="Email" name="email"/>
                 <input type="password" placeholder="Password" name="password"/>
+                <input type="hidden" name="role" value="doctor">
                 
                 <button type="submit">SignUp</button>
             </form>
