@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MeasurementController;
 use App\Http\Controllers\NoteController;
+use App\Models\Measurement;
 use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +54,7 @@ Route::get('/clinicianManage', function () {
 Route::get('/clinicianSupportMessage', function () {
     $patients = Patient::all();
 
-    return view('clinicianSupportMessage',compact('patients'));
+    return view('clinicianSupportMessage', compact('patients'));
 });
 
 Route::get('/newPatient', function () {

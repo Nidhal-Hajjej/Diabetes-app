@@ -63,31 +63,33 @@
                         <th>Time Recorded</th>
                     </tr>
                     {{-- {{#each measurements}} --}}
+                    @foreach ($measurements as $measurement )  
                     <tr class="patient-data-row">     
                         {{-- {{#if (eqBcg this.type)}} --}}
-                            <td>Blood Glucose Level</td>
-                            {{-- <td>{{this.value}} nmol/L</td> --}}
+                        <td>Blood Glucose Level</td>
+                        <td>{{ $measurement->bloodLevel }} nmol/L</td>
                         {{-- {{/if}} --}}
                         {{-- {{#if (eqWeight this.type)}} --}}
-                            <td>Weight</td>
-                            {{-- <td>{{this.value}} kg</td> --}}
+                        <td>Weight</td>
+                        <td>{{ $measurement->weight }} kg</td>
                         {{-- {{/if}} --}}
                         {{-- {{#if (eqInsulin this.type)}} --}}
-                            <td>Insulin Doses</td>
-                            {{-- <td>{{this.value}} dose(s)</td> --}}
+                        <td>Insulin Doses</td>
+                        <td>{{ $measurement->insulinDoses }} dose(s)</td>
                         {{-- {{/if}} --}}
                         {{-- {{#if (eqExercise this.type)}} --}}
-                            <td>Exercise</td>
-                            {{-- <td>{{this.value}} steps</td> --}}
+                        <td>Exercise</td>
+                        <td>{{ $measurement->exercise }} steps</td>
                         {{-- {{/if}} --}}
                         {{-- {{#if (isEmptyStr this.comment)}} --}}
-                            <td> - </td>
+                        <td> - </td>
                         {{-- {{else}} --}}
-                            {{-- <td style="overflow: auto;">{{this.comment}}</td> --}}
+                        {{-- <td style="overflow: auto;">{{this.comment}}</td> --}}
                         {{-- {{/if}} --}}
                         {{-- <td>{{formatDateTime this.date}}</td> --}}
                         <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
                     </tr>
+                    @endforeach
                     {{-- {{/each}} --}}
                 </table>
             </div>

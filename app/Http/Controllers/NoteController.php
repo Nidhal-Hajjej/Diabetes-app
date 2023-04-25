@@ -16,7 +16,7 @@ class NoteController extends Controller
     {
         $notes = Note::latest()->paginate(5);
 
-        return view('patientOverview',compact('notes'));
+        return view('patientOverview', compact('notes'));
     }
 
     /**
@@ -40,11 +40,10 @@ class NoteController extends Controller
         $request->validate([
             'comment' => 'required',
         ]);
-    
+
         Note::create($request->all());
-     
-        return redirect()->route('notes.index')
-                        ->with('success','Product created successfully.');
+
+        return redirect()->route('notes.index');
     }
 
     /**
@@ -90,8 +89,8 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         $note->delete();
-    
+
         return redirect()->route('notes.index')
-                        ->with('success','Note deleted successfully');
+                        ->with('success', 'Note deleted successfully');
     }
 }
