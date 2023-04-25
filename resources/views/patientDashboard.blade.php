@@ -72,7 +72,7 @@
                             {{-- {{/if}} --}}
                         {{-- {{/if}} --}}
                     </ul>
-                    <a href="/patient/record">Record measurements</a>
+                    <a href="/record">Record measurements</a>
                 </div>
             </div>
 
