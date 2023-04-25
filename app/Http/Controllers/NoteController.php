@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\Measurement;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -15,8 +16,9 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Note::latest()->paginate(5);
+        $measurements = Measurement::latest()->paginate(10);
 
-        return view('patientOverview', compact('notes'));
+        return view('patientOverview', compact('notes', "measurements"));
     }
 
     /**

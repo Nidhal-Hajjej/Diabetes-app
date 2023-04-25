@@ -18,7 +18,7 @@
                     <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
                 </div>
                 <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New Patient</a></button>
-                <button type="clinician-button" id="clinician-button"><a href="/clinician/account">Manage Your Account</a></button>
+                <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your Account</a></button>
             </div>
         </div>
         
