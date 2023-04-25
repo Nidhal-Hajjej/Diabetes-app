@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MeasurementController;
 use App\Http\Controllers\NoteController;
+use App\Models\Measurement;
 use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +54,7 @@ Route::get('/clinicianManage', function () {
 Route::get('/clinicianSupportMessage', function () {
     $patients = Patient::all();
 
-    return view('clinicianSupportMessage',compact('patients'));
+    return view('clinicianSupportMessage', compact('patients'));
 });
 
 Route::get('/newPatient', function () {
@@ -76,10 +78,18 @@ Route::get('/patientDashboard', function () {
     return view('patientDashboard');
 });
 
-Route::resource('/notes', NoteController::class);
+Route::get('/record', function () {
+    return view('record');
+});
 
-// Route::get('/patientOverview', function () {
-    
-//     $notes = Note::latest()->paginate(5);
-//     return view('patientOverview',compact('notes'));
-// });
+Route::resource('/notes', NoteController::class);
+Route::resource('/notes', MeasurementController::class);
+
+Route::get('/patientOverview', function () {
+
+    $notes = Note::latest()->paginate(5);
+    $measurements = Measurement::latest()->paginate(5);
+    return view('patientOverview', compact('notes', "measurements"));
+});
+
+Route::post('/storeMeasurements', [ MeasurementController::class,'store']);
