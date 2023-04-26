@@ -12,14 +12,12 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('measurements', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('screen_name')->nullable();
-            $table->date('dob')->nullable();
+            $table->integer('bloodLevel');
+            $table->integer('weight');
+            $table->integer('exercise');
+            $table->integer('insulinDoses');
             $table->timestamps();
         });
     }
@@ -31,8 +29,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('measurements');
     }
 };
-$table->string('email')->unique();
-            $table->string('password');

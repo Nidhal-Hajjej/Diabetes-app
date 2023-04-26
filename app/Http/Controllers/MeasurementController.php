@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
 use App\Models\Measurement;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoremeasurementRequest;
+use App\Http\Requests\UpdatemeasurementRequest;
 
-class NoteController extends Controller
+class MeasurementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,9 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::latest()->paginate(5);
         $measurements = Measurement::latest()->paginate(10);
-        // dd($notes);
-        return view('patientOverview', compact('notes', "measurements"));
+
+        return view('patientOverview', compact('measurements'))->name("index");
     }
 
     /**
@@ -34,27 +33,32 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoremeasurementRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoremeasurementRequest $request)
     {
+
         $request->validate([
-            'comment' => 'required',
+            'bloodLevel'=> 'required',
+            'exercise'=> 'required',
+            'weight'=> 'required',
+            'insulinDoses'=> 'required',
         ]);
 
-        Note::create($request->all());
+        Measurement::create($request->all());
 
-        return redirect()->route('notes.index');
+        return redirect()->route('measurements.index');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\measurement  $measurement
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(measurement $measurement)
     {
         //
     }
@@ -62,10 +66,10 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\measurement  $measurement
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(measurement $measurement)
     {
         //
     }
@@ -73,11 +77,11 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdatemeasurementRequest  $request
+     * @param  \App\Models\measurement  $measurement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatemeasurementRequest $request, measurement $measurement)
     {
         //
     }
@@ -85,14 +89,11 @@ class NoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\measurement  $measurement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy(measurement $measurement)
     {
-        $note->delete();
-
-        return redirect()->route('notes.index')
-                        ->with('success', 'Note deleted successfully');
+        //
     }
 }

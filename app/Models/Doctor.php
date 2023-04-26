@@ -19,11 +19,10 @@ class Doctor extends Model
         'patients',
     ];
 
-    protected $casts = [
-        'patients' => 'array',
-    ];
-
     protected $hidden = [
         'password',
     ];
+    // protected $casts = [
+    //     'patients' => 'array',
+    // ];
 }

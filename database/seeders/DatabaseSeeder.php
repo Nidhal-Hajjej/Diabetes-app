@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DoctorSeeder::class,
             PatientSeeder::class,
             NoteSeeder::class,
+            MeasurementSeeder::class,
         ]);
     }
 }

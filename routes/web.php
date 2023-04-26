@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
+use App\Models\Measurement;
 use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
@@ -60,14 +62,14 @@ Route::get('/clinicianDashboard', function () {
     return view('clinicianDashboard');
 });
 
-Route::get('/clinicianManage', function () {
+Route::get('/clinicianManage', function () { // nel8oha
     return view('clinicianManage');
 });
 
 Route::get('/clinicianSupportMessage', function () {
-    $patients = Patient::all();
+    $patients = Patient::where('doctor_id', 1)->get();
 
-    return view('clinicianSupportMessage',compact('patients'));
+    return view('clinicianSupportMessage', compact('patients'));
 });
 
 Route::get('/newPatient', function () {
@@ -103,3 +105,4 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 //     $notes = Note::latest()->paginate(5);
 //     return view('patientOverview',compact('notes'));
 // });
+Route::resource('/doc', DoctorController::class);
