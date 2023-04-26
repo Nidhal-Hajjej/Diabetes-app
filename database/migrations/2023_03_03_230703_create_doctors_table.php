@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('screen_name')->nullable();
             $table->date('dob')->nullable();
             $table->json('patients')->nullable();
@@ -34,3 +36,5 @@ return new class extends Migration
         Schema::dropIfExists('doctors');
     }
 };
+$table->string('email')->unique();
+            $table->string('password');

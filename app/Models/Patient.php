@@ -11,6 +11,8 @@ class Patient extends Model
     protected $fillable = [
         'first_name',
         'last_name',
+        'email',
+        'password',
         'screen_name',
         'dob',
         'bio',
@@ -22,6 +24,10 @@ class Patient extends Model
 
     protected $casts = [
         'measurements' => 'json',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     protected $table = 'patients';

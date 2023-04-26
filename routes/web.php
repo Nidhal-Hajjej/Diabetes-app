@@ -4,6 +4,9 @@ use App\Http\Controllers\NoteController;
 use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +24,19 @@ Route::get('/', function () {
 });
 
 
-Route::get('/login', function () {
-    return view('login');
+// Route::post('/login', function () {
+//     return view('login');
+// })->name('login');;
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+
+Route::get('/signup', function () {
+    return view('signup');
 });
+
+Route::post('/signup', [FormController::class, 'processForm'])->name('signup.processForm');
 
 Route::get('/diabetes', function () {
     return view('diabetes');
@@ -32,6 +45,8 @@ Route::get('/diabetes', function () {
 Route::get('/aboutWebsite', function () {
     return view('aboutWebsite');
 });
+
+
 
 Route::get('/account', function () {
     return view('account');
@@ -77,3 +92,14 @@ Route::get('/patientDashboard', function () {
 });
 
 Route::resource('/notes', NoteController::class);
+
+
+Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
+
+// Route::get('/patientOverview', function () {
+    
+//     $notes = Note::latest()->paginate(5);
+//     return view('patientOverview',compact('notes'));
+// });

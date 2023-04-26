@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-
-{{-- 
+    {{-- 
     <div class="page-heading" style="background-image: url('../images/header-img-2.jpg');">
         <h1>Log In</h1>          
     </div>
@@ -49,52 +48,45 @@
 
 
     <body>
-    
-        <h2>Login</h2>
+
+        <h2>Create a new account</h2>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form method="POST" action="{{ route('login.post') }}">
+                <form action="{{ route('signup.processForm') }}" method="POST">
                     @csrf
-                    <h1>Login as a Patient</h1>
-                    <div><br></div>
-                    
-                    
-                    <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus/>
-                    <input type="password" placeholder="Password" name="password" required />
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul style="color: red; font-size: 14px">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                    <a href="#">Forgot your password?</a>
-                    <button type="submit">Login</button>
+                    <h1>SignUp as a Patient</h1>
+
+
+                    <input type="text" placeholder="First Name" name="first_name" />
+                    <input type="text" placeholder="Last Name" name="last_name" />
+                    <input type="email" placeholder="Email" name="email" />
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                    <input type="password" placeholder="Password" name="password" />
+                    <input type="hidden" name=" patientSignup" value="patient">
+                    <button type="submit">SignUp</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form method="POST" action="{{ route('login.post') }}">
+                <form action="{{ route('signup.processForm') }}" method="POST">
                     @csrf
-                    <h1>Login as a Doctor</h1>
-                    <div >
-                        <br>
-                    </div>
-                    
-                    <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus/>
-                    <input type="password" placeholder="Password" name="password" required />
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul style="color: red; font-size: 14px">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <a href="{{ route('password.request') }}" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
-                    <button type="submit">Login</button>
+                    <h1>SignUp as a Doctor</h1>
+
+                    <input type="text" placeholder="First Name" name="first_name" />
+                    <input type="text" placeholder="Last Name" name="last_name" />
+                    <input type="email" placeholder="Email" name="email" />
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                    <input type="password" placeholder="Password" name="password" />
+                    <input type="hidden" name="doctorSignup" value="doctor">
+
+                    <button type="submit">SignUp</button>
                 </form>
             </div>
             <div class="overlay-container">
@@ -105,17 +97,21 @@
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h3>You are a Patient ?</h3>
-                        
+
                         <button class="ghost" id="signUp">I'm a patient</button>
                     </div>
                 </div>
             </div>
         </div>
-        <h4>You don't have an account ?</h4>
-        <h4><a href="/signup">Go to Sign Up page</a></h4>
-    
-        
+        <h4>You have already an account ?</h4>
+        <h4><a href="/login">Go to Login page</a></h4>
+
+
+
+
+
+
+
         <script src="{{ asset('js/login.js') }}"></script>
     </body>
-
 @endsection
