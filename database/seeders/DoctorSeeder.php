@@ -23,6 +23,7 @@ class DoctorSeeder extends Seeder
             $clinician->first_name = $faker->firstName;
             $clinician->last_name = $faker->lastName;
             $clinician->screen_name = $faker->userName;
+            $clinician->email = $faker->email;
             $clinician->dob = $faker->date;
             $clinician->save();
         }
