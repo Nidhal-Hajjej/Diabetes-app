@@ -93,7 +93,7 @@
                         </ul>
                     </div>
                 @endif
-                    <a href="#">Forgot your password?</a>
+                <a href="{{ route('password.request') }}" data-toggle="modal" data-target="#forgotPasswordModal">Forgot Password?</a>
                     <button type="submit">Login</button>
                 </form>
             </div>

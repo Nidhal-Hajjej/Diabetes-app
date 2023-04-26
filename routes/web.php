@@ -6,6 +6,7 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,11 @@ Route::get('/patientDashboard', function () {
 });
 
 Route::resource('/notes', NoteController::class);
+
+
+Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
 
 // Route::get('/patientOverview', function () {
     
