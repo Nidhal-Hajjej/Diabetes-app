@@ -106,3 +106,7 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 //     return view('patientOverview',compact('notes'));
 // });
 Route::resource('/doc', DoctorController::class);
+
+Route::get('/diabetes', 'App\Http\Controllers\DiabetesController@index');
+Route::post('/diabetes', 'App\Http\Controllers\DiabetesController@index');
+
