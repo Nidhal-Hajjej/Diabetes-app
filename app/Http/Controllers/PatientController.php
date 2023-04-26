@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
-use App\Models\Measurement;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
-class NoteController extends Controller
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::latest()->paginate(5);
-        $measurements = Measurement::latest()->paginate(10);
-        // dd($notes);
-        return view('patientOverview', compact('notes', "measurements"));
+        //
     }
 
     /**
@@ -39,22 +35,16 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'comment' => 'required',
-        ]);
-
-        Note::create($request->all());
-
-        return redirect()->route('notes.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Patient $patient)
     {
         //
     }
@@ -62,10 +52,10 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Patient $patient)
     {
         //
     }
@@ -74,10 +64,10 @@ class NoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Patient $patient)
     {
         //
     }
@@ -85,14 +75,11 @@ class NoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy(Patient $patient)
     {
-        $note->delete();
-
-        return redirect()->route('notes.index')
-                        ->with('success', 'Note deleted successfully');
+        //
     }
 }

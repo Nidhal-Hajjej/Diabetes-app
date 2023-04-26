@@ -16,7 +16,7 @@
 <body> 
    <header id="header">
         <nav class="navbar">
-            <a href="/" class="logo"><span style="color:black">D</span>@H</a>
+            <a href="/" class="logo">D@H</a>
             <ul class="nav-menu">
                 {{-- {{#if loggedIn}}
                 <li class="nav-item">
@@ -28,19 +28,8 @@
                 {{else}} --}}
                 
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>
-                </li>
+                    <a href="/" class="nav-link">Back to Home</a>
                 
-                <li class="nav-item">
-                    <a href="/diabetes" class="nav-link">Diabetes</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/aboutWebsite" class="nav-link">This Website</a>
-                </li>
-               
-                <li class="nav-item">
-                    <a href="/login" class="nav-link"> Login </a>
 
                     {{-- {{#if loggedIn}}
                     <form action="/logout" method="post">

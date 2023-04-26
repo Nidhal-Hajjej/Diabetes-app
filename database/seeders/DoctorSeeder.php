@@ -18,17 +18,15 @@ class DoctorSeeder extends Seeder
         $faker = Factory::create();
 
         // Generate 5 random clinicians
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $clinician = new Doctor();
             $clinician->first_name = $faker->firstName;
             $clinician->last_name = $faker->lastName;
-            $clinician->screen_name = $faker->optional()->userName;
-            $clinician->dob = $faker->optional()->date;
-            $clinician->patients = [
-                $faker->uuid,
-                $faker->uuid,
-                $faker->uuid,
-            ];
+            $clinician->email = $faker->email;
+            $clinician->password = $faker->password;
+            $clinician->screen_name = $faker->userName;
+            $clinician->email = $faker->email;
+            $clinician->dob = $faker->date;
             $clinician->save();
         }
     }
