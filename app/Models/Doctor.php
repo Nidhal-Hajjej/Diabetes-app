@@ -16,7 +16,7 @@ class Doctor extends Model
         'patients',
     ];
 
-    protected $casts = [
-        'patients' => 'array',
-    ];
+    // protected $casts = [
+    //     'patients' => 'array',
+    // ];
 }

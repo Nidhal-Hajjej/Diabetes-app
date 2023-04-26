@@ -14,8 +14,7 @@ class Patient extends Model
         'screen_name',
         'dob',
         'bio',
-        'engagement_rate',
-        'clinicianId',
+        'doctor_id',
         'supportMessage',
         'measurements',
     ];
