@@ -22,6 +22,8 @@ class PatientSeeder extends Seeder
             Patient::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
+                'email' => $faker->email,
+                'password' => $faker->password,
                 'screen_name' => $faker->userName,
                 'dob' => $faker->date,
                 'bio' => $faker->paragraph,
