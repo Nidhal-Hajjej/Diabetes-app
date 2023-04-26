@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MeasurementController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
 use App\Models\Measurement;
 use App\Models\Note;
@@ -26,8 +26,16 @@ Route::get('/', function () {
 });
 
 
-Route::get('/login', function () {
-    return view('login');
+// Route::post('/login', function () {
+//     return view('login');
+// })->name('login');;
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+
+Route::get('/signup', function () {
+    return view('signup');
 });
 
 Route::post('/signup', [FormController::class, 'processForm'])->name('signup.processForm');
@@ -54,12 +62,12 @@ Route::get('/clinicianDashboard', function () {
     return view('clinicianDashboard');
 });
 
-Route::get('    ', function () {
+Route::get('/clinicianManage', function () { // nel8oha
     return view('clinicianManage');
 });
 
 Route::get('/clinicianSupportMessage', function () {
-    $patients = Patient::all();
+    $patients = Patient::where('doctor_id', 1)->get();
 
     return view('clinicianSupportMessage', compact('patients'));
 });
