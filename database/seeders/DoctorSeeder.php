@@ -22,6 +22,8 @@ class DoctorSeeder extends Seeder
             $clinician = new Doctor();
             $clinician->first_name = $faker->firstName;
             $clinician->last_name = $faker->lastName;
+            $clinician->email = $faker->email;
+            $clinician->password = $faker->password;
             $clinician->screen_name = $faker->userName;
             $clinician->email = $faker->email;
             $clinician->dob = $faker->date;
