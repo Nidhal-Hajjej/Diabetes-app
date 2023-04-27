@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
 use App\Models\Measurement;
@@ -124,4 +125,4 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 Route::resource('/doc', DoctorController::class);
 
 
-Route::post('/change-password', 'PatientController@updatePassword')->name('updatePassword');
+Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
