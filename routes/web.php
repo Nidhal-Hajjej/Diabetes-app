@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
 use App\Models\Measurement;
@@ -30,8 +31,24 @@ Route::get('/', function () {
 //     return view('login');
 // })->name('login');;
 
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route::get('/logout', function () {
+//     Auth::logout();
+//     return redirect('/login');
+// })->name('logout');
+Route::post('/logout', function () {
+    Session::flush();
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
+
+
 
 
 Route::get('/signup', function () {
@@ -106,5 +123,8 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 //     return view('patientOverview',compact('notes'));
 // });
 Route::resource('/doc', DoctorController::class);
+
+
+Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
 
 Route::get('chart', [ChartJSController::class, 'index']);
