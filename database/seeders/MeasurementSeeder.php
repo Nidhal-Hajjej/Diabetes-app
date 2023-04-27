@@ -17,12 +17,13 @@ class MeasurementSeeder extends Seeder
     {
         $faker=Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Measurement::create([
                 'bloodLevel' =>$faker->randomDigit,
                 'weight' =>$faker->randomDigit,
                 'exercise' =>$faker->randomDigit,
                 'insulinDoses' =>$faker->randomDigit,
+                'patient_id' => $faker->numberBetween(1, 9),
 
             ]);
         };

@@ -8,20 +8,22 @@
 
     <div class="clinician-dashboard">
         <div class="clinician-info-container">
-            <div class="clinician-info">   
+            <div class="clinician-info">
                 {{-- <h1>Hello, Dr.{{user.first_name}}</h1> --}}
                 {{-- <h2>{{date}}</h2> --}}
                 <br>
                 {{-- <p>You are currently incharge of {{numPatients}} patients.</p> --}}
-                <p>Your patient's latest logs are displayed on the right. Click on patient name to access individual profiles.</p>
+                <p>Welcome Dr. {{ $name }} </p>
                 <div>
-                    <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"  background="transparent"  speed="1"  loop  autoplay></lottie-player>
+                    <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
+                        background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
                 <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New Patient</a></button>
-                <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your Account</a></button>
+                <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your
+                        Account</a></button>
             </div>
         </div>
-        
+
         <div class="clinician-table-container">
             <table class="clinician-table-styled">
                 <thead>
@@ -35,14 +37,14 @@
                 </thead>
                 <tbody>
                     @foreach ($patients as $patient)
-                    <tr style="cursor:pointer;" onclick="location.href='/notes';">
-                        <th>{{ $patient["first_name"] }}</th>
-                        <th>{{ $patient["measurements"]["bcg"] }}</th>
-                        <th>{{ $patient["measurements"]["bcg"] }}</th>
-                        <th>{{ $patient["measurements"]["bcg"] }}</th>
-                        <th>{{ $patient["measurements"]["bcg"] }}</th> 
-                    </tr>
-                    @endforeach   
+                        <tr style="cursor:pointer;" onclick="location.href='/notes/{{ $patient['id'] }}';">
+                            <th>{{ $patient['first_name'] }}</th>
+                            <th>{{ $patient['measurements']['bcg'] }}</th>
+                            <th>{{ $patient['measurements']['weight'] }}</th>
+                            <th>{{ $patient['measurements']['insulin'] }}</th>
+                            <th>{{ $patient['measurements']['exercise'] }}</th>
+                        </tr>
+                    @endforeach
                     {{-- {{#each data}}
                         <tr style="cursor:pointer;" onclick="location.href='manage-patient/{{this.patient._id}}';">
                         <th><a href="manage-patient/{{this.patient._id}}"">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>

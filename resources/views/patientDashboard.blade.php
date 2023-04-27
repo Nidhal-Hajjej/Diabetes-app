@@ -17,7 +17,9 @@
             
             <div id="patient-details">
                 <img src="\images\male-profile.jpg">
-                <p> Name : 
+                <p> Name :{{--  {{ $name }}  --}}
+
+
                     {{-- {{singlePatient.first_name}} {{singlePatient.last_name}} --}}
                 </p>
                 {{-- <p><b>Screen Name:</b> {{singlePatient.screen_name}}</p> --}}
@@ -25,7 +27,7 @@
                     {{-- {{dob}} --}}
                 </p>
                 {{-- <p><b>Bio:</b> {{singlePatient.bio}}</p> --}}
-                <button><a href="/patient/account" style="color: white;">Account settings</a></button>
+                <button><a href="account" style="color: white;">Account settings</a></button>
                 {{-- {{#if (gte singlePatient.engagement_rate 80)}} --}}
                 <div class="patient-badge">
                     <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>

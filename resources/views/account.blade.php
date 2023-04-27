@@ -43,29 +43,40 @@
                     </section>
                     <section id="change-password" class="tab-panel">
                         <h2>Change Password</h2>
-                        <form action="/patient/account/change-password" class="change-pw-form" method="post">
+                        <form action="{{ route('updatePassword') }}" class="change-pw-form" method="post">
+                            @csrf
                             <div class="input-box">
                                 <span class="label">Current Password</span>
                                 <div class="input">
-                                    <input type="password" placeholder="Enter current password" id="opw" name="curr_pw" required>
+                                    <input type="password" placeholder="Enter current password" id="opw"
+                                        name="curr_pw" required>
                                 </div>
                             </div>
 
                             <div class="input-box">
                                 <span class="label">New Password</span>
                                 <div class="input">
-                                <input type="password" placeholder="Enter new Password" id="npw" name="new_pw" minlength="8" required>
+                                    <input type="password" placeholder="Enter new Password" id="npw" name="new_pw"
+                                        minlength="8" required>
                                 </div>
                             </div>
 
                             <div class="input-box">
                                 <span class="label">Confirm New Password</span>
                                 <div class="input">
-                                <input type="password" placeholder="Confirm new Password" id="cpw" name="confirm_new_pw" minlength="8" required>
+                                    <input type="password" placeholder="Confirm new Password" id="cpw"
+                                        name="confirm_new_pw" minlength="8" required>
                                 </div>
                             </div>
                             <button type="submit" id="change-pw-btn">Submit</button>
                         </form>
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
                     </section>
 
                     {{-- {{!-- add template to radio button checked  --}} --}}
@@ -73,26 +84,29 @@
                         <form id="theme-form" action="/patient/account/change-theme" method="post">
                             <h2>Change Theme</h2>
                             <div class="theme-container">
-                                    <label class="theme">
-                                        <input type="radio" id="default-theme" name="theme" value="default">
-                                        <img src="https://media.istockphoto.com/photos/blue-gradient-soft-background-picture-id1093513194?k=20&m=1093513194&s=170667a&w=0&h=Te14UkjvQeBBii6b2eD9GQcslk0NazN3LoNXl7BPDQg=">
-                                        <h3>Default</h3>
-                                    </label>
-                                    <label class="theme">
-                                        <input type="radio" id="dark-theme" name="theme" value="dark">
-                                        <img src="https://images.unsplash.com/photo-1515462277126-2dd0c162007a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHRoZW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
-                                        <h3>Dark</h3>
-                                    </label>
-                                    <label class="theme">
-                                        <input type="radio" id="matrix-theme" name="theme" value="matrix">
-                                        <img src="https://wallpaperaccess.com/full/683992.jpg">
-                                        <h3>Matrix</h3>
-                                    </label>
-                                    <label class="theme">
-                                        <input type="radio" id="spring-theme" name="theme" value="spring">
-                                        <img src="https://www.nj.com/resizer/LZ0Y3O0GrmrSsOw4MYbrEYh-ypg=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/A7TFEUUSRJBAZHOCLPWPMXAM2E.jpg">
-                                        <h3>Spring</h3>
-                                    </label>              
+                                <label class="theme">
+                                    <input type="radio" id="default-theme" name="theme" value="default">
+                                    <img
+                                        src="https://media.istockphoto.com/photos/blue-gradient-soft-background-picture-id1093513194?k=20&m=1093513194&s=170667a&w=0&h=Te14UkjvQeBBii6b2eD9GQcslk0NazN3LoNXl7BPDQg=">
+                                    <h3>Default</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="dark-theme" name="theme" value="dark">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1515462277126-2dd0c162007a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHRoZW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+                                    <h3>Dark</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="matrix-theme" name="theme" value="matrix">
+                                    <img src="https://wallpaperaccess.com/full/683992.jpg">
+                                    <h3>Matrix</h3>
+                                </label>
+                                <label class="theme">
+                                    <input type="radio" id="spring-theme" name="theme" value="spring">
+                                    <img
+                                        src="https://www.nj.com/resizer/LZ0Y3O0GrmrSsOw4MYbrEYh-ypg=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/A7TFEUUSRJBAZHOCLPWPMXAM2E.jpg">
+                                    <h3>Spring</h3>
+                                </label>
                             </div>
                             <div class="theme-text-container">
                                 <h2>Your Current Theme</h2>

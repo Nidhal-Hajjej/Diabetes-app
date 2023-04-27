@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
 use App\Models\Measurement;
@@ -8,7 +9,7 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ChartJSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,24 @@ Route::get('/', function () {
 //     return view('login');
 // })->name('login');;
 
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route::get('/logout', function () {
+//     Auth::logout();
+//     return redirect('/login');
+// })->name('logout');
+Route::post('/logout', function () {
+    Session::flush();
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
+
+
 
 
 Route::get('/signup', function () {
@@ -101,7 +118,7 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 
 
 // Route::get('/patientOverview', function () {
-    
+
 //     $notes = Note::latest()->paginate(5);
 //     return view('patientOverview',compact('notes'));
 // });

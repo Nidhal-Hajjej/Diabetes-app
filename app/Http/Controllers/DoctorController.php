@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -17,10 +18,24 @@ class DoctorController extends Controller
     {
         //
         // $doctor = Doctor::where("id", 1);
-        $patients = Patient::where("doctor_id", 1)->get()->toArray();
+        $user = Auth::user();
+        $name = $user->name;
+        // $doctor = Doctor::where('first_name', $name)->get();
+        $patients = Patient::where("doctor_id", 11)->get()->toArray();
         // dd($patients);
-        return view("clinicianDashboard", compact('patients'));
+        // return view("clinicianDashboard", compact('patients'));
+        return view("clinicianDashboard", compact('name', 'patients'));
     }
+
+
+//     public function clinicianDashboard()
+// {
+//     // $user = Auth::user();
+//     // return view('clinicianDashboard', ['firstName' => $user->first_name, 'lastName' => $user->last_name]);
+//     $user = Auth::user();
+//     $first_name = $user->first_name; // Assuming that the first name is stored in the "firstName" column of the "users" table
+//     return view("clinicianDashboard", compact('first_name'));
+// }
 
     /**
      * Show the form for creating a new resource.
@@ -31,6 +46,18 @@ class DoctorController extends Controller
     {
         //
     }
+
+    public function isDoctor($email, $password)
+    {
+        $doctor = Doctor::where('email', $email)->first();
+
+        if ($doctor && Hash::check($password, $doctor->password)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
     /**
      * Store a newly created resource in storage.

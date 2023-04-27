@@ -1,13 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <script src="/scripts/closeFlash.js"></script>
-    <script src="{{ asset ('/js/patientOverview.js') }}"></script>
-    <script src="/scripts/patientDataFilter.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="/scripts/patientChart.js"></script>
-    <script src="/scripts/backToTop.js"></script>
-
     {{-- {{#if loggedIn}}
     {{> flashSuccess}}
     {{> flashError}}
@@ -18,7 +11,6 @@
     {{-- <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" > --}}
     <div class="overview-container">
         <section class="data-table flex-column-center">
-
             <div class="chart-toggle-container">
                 <h3>Filter chart by</h3>
                 <div class="chart-toggles">
@@ -35,14 +27,46 @@
                     <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
                     {{-- {{/if}} --}}
                 </div>
+                <canvas id="myChart" height="100px"></canvas>
+
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script type="text/javascript">
+                    var labels = {{ Js::from($labels) }};
+                    var users = {{ Js::from($data) }};
+
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'My First dataset',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: users,
+                        }]
+                    };
+
+                    const config = {
+                        type: 'line',
+                        data: data,
+                        options: {}
+                    };
+
+                    const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                    );
+                </script>
+
             </div>
 
-            <section class="patient-chart-section">
+            {{-- <section class="patient-chart-section">
                 <div id="patient-chart-container"></div>
-            </section>
+            </section> --}}
 
-            <h1>All Data</h1>
-            
+            {{-- <h1>All Data</h1>
+
             <br>
             <div class="patient-data-filters">
                 <select name="search-filter" id="search-filter">
@@ -53,8 +77,9 @@
                     <option value="time">Time</option>
                 </select>
                 <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
-            </div>
-            <div class="patient-data-container">
+            </div> --}}
+            {{-- BECH NE7I MEASUREMENTS MEN PATIENT OVERVIEW --}}
+            {{-- <div class="patient-data-container">
                 <table id="patient-data-table">
                     <tr class="patient-data-header">
                         <th>Measurement</th>
@@ -62,37 +87,22 @@
                         <th>Comment</th>
                         <th>Time Recorded</th>
                     </tr>
-                    {{-- {{#each measurements}} --}}
-                    @foreach ($measurements as $measurement )  
-                    <tr class="patient-data-row">     
-                        {{-- {{#if (eqBcg this.type)}} --}}
-                        <td>Blood Glucose Level</td>
-                        <td>{{ $measurement->bloodLevel }} nmol/L</td>
-                        {{-- {{/if}} --}}
-                        {{-- {{#if (eqWeight this.type)}} --}}
-                        <td>Weight</td>
-                        <td>{{ $measurement->weight }} kg</td>
-                        {{-- {{/if}} --}}
-                        {{-- {{#if (eqInsulin this.type)}} --}}
-                        <td>Insulin Doses</td>
-                        <td>{{ $measurement->insulinDoses }} dose(s)</td>
-                        {{-- {{/if}} --}}
-                        {{-- {{#if (eqExercise this.type)}} --}}
-                        <td>Exercise</td>
-                        <td>{{ $measurement->exercise }} steps</td>
-                        {{-- {{/if}} --}}
-                        {{-- {{#if (isEmptyStr this.comment)}} --}}
-                        <td> - </td>
-                        {{-- {{else}} --}}
-                        {{-- <td style="overflow: auto;">{{this.comment}}</td> --}}
-                        {{-- {{/if}} --}}
-                        {{-- <td>{{formatDateTime this.date}}</td> --}}
-                        <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
-                    </tr>
+                    @foreach ($measurements as $measurement)
+                        <tr class="patient-data-row">
+                            <td>Blood Glucose Level</td>
+                            <td>{{ $measurement->bloodLevel }} nmol/L</td>
+                            <td>Weight</td>
+                            <td>{{ $measurement->weight }} kg</td>
+                            <td>Insulin Doses</td>
+                            <td>{{ $measurement->insulinDoses }} dose(s)</td>
+                            <td>Exercise</td>
+                            <td>{{ $measurement->exercise }} steps</td>
+                            <td> - </td>
+                            <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
+                        </tr>
                     @endforeach
-                    {{-- {{/each}} --}}
                 </table>
-            </div>
+            </div> --}}
         </section>
 
         <section class="patient-notes flex-column-center">
@@ -101,26 +111,26 @@
                 <br>
                 {{-- {{#each notes}} --}}
                 @foreach ($notes as $note)
-                    <div class="note-container" style="color: {{ $note->color }}">
-                        <p>{{$note->comment}}</p>
+                    <div class="note-container {{ $note->color }}">
+                        <p>{{ $note->comment }}</p>
                         <br>
-                        <p>{{$note->date}}</p>
+                        <p>{{ $note->date }}</p>
                         {{-- <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
                         <form action="/clinician/manage-patient/{{$note->patientId}}/delete-note" method="post" class="note-del-form">
                             <input type="hidden" value={{$note->patientId}} name="pid">
                             <input type="hidden" value=
                                 {{-- {{this._id}}  --}}
-                                {{-- name="nid"> --}}
-                            {{-- {{!-- <button type="submit" style="display: none;"></button> --}}
+                        {{-- name="nid"> --}}
+                        {{-- {{!-- <button type="submit" style="display: none;"></button> --}}
                         {{-- </form>  --}}
-                        <form action="{{ route('notes.destroy',$note->id) }}" method="POST">
+                        <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
 
                             @csrf
                             @method('DELETE')
-                            
+
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        
+
                     </div>
                 @endforeach
                 {{-- {{/each}} --}}
@@ -133,10 +143,10 @@
                     <div id="dark-pink" class="note-option dark-pink"></div>
                     <div id="light-pink" class="note-option light-pink"></div>
                 </div>
-                <form action= "{{ route('notes.store') }}" method="post">
-                    @csrf  
+                <form action="{{ route('notes.store') }}" method="post">
+                    @csrf
                     {{-- <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">   --}}
-                    <input type="hidden" value= name="pid">
+                    <input type="hidden" value=name="pid">
                     {{-- <input type="hidden" value={{patient._id}} name="pid"> --}}
                     <input type="hidden" name="notecolor" id="note-color" value="dark-yellow">
                     <div class="comment-input">
@@ -155,12 +165,12 @@
         </section>
     </div>
 
-    <button id="back-to-top-btn" title="Go to top"><img src="/images/icons/top.svg" style="width: 30px; height: 30px;" alt="back to top button"></button>
+    <button id="back-to-top-btn" title="Go to top"><img src="/images/icons/top.svg" style="width: 30px; height: 30px;"
+            alt="back to top button"></button>
 
     {{-- {{else}}
 
     {{> loggedOut}}
 
     {{/if}} --}}
-
 @endsection
