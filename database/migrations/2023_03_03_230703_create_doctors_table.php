@@ -34,5 +34,3 @@ return new class () extends Migration {
         Schema::dropIfExists('doctors');
     }
 };
-$table->string('email')->unique();
-            $table->string('password');

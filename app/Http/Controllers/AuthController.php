@@ -8,7 +8,6 @@ use App\Models\Patient;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\Hash;
 
-
 class AuthController extends Controller
 {
     public function __construct()
@@ -46,8 +45,8 @@ class AuthController extends Controller
     //     'password' => 'required',
     // ]);
 
-    // Check if the email exists in the patients table
-    $patient = Patient::where('email', $request->email)->first();
+        // Check if the email exists in the patients table
+        $patient = Patient::where('email', $request->email)->first();
 
     if ($patient && Hash::check($request->password, $patient->password)) {
         if (Auth::attempt($credentials)) {
@@ -59,8 +58,8 @@ class AuthController extends Controller
         return redirect('/patientDashboard');
     }
 
-    // Check if the email exists in the doctors table
-    $doctor = Doctor::where('email', $request->email)->first();
+        // Check if the email exists in the doctors table
+        $doctor = Doctor::where('email', $request->email)->first();
 
     if ($doctor && Hash::check($request->password, $doctor->password)) {
         if (Auth::attempt($credentials)) {

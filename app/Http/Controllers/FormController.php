@@ -12,31 +12,29 @@ use Illuminate\Validation\ValidationException;
 
 class FormController extends Controller
 {
+    public function processForm(Request $request)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
 
-
-public function processForm(Request $request)
-{
-    // Validate the form data
-    $validatedData = $request->validate([
-    'first_name' => 'required|string|max:255',
-    'last_name' => 'required|string|max:255',
-    'email' => 'required|string|email|max:255|unique:users',
-    'password' => 'required|string|min:8',
-    
 ]);
 
-// if ($validatedData->fails()) {
-//     return redirect()->back()->withErrors($validatedData)->withInput();
-// }
+        // if ($validatedData->fails()) {
+        //     return redirect()->back()->withErrors($validatedData)->withInput();
+        // }
 
-$role = ($request->has('patientSignup')) ? 'patient' : 'doctor';
+        $role = ($request->has('patientSignup')) ? 'patient' : 'doctor';
 
-// // Save the form data to the database
-$user = new User;
-$user->name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
-$user->email = $validatedData['email'];
-$user->password = Hash::make($validatedData['password']);
-$user->save();
+        // // Save the form data to the database
+        $user = new User();
+        $user->name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->save();
 
 if ($role === 'patient') {
     // Save data to the patients table
@@ -66,10 +64,10 @@ if ($role === 'patient') {
     $doctor->save();
 }
 
-// Redirect back to the form with a success message
-return redirect('/login')->with('success', 'Form submitted successfully!');
+        // Redirect back to the form with a success message
+        return redirect('/login')->with('success', 'Form submitted successfully!');
 
-}
+    }
 
 
 
