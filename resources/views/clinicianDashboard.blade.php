@@ -13,8 +13,6 @@
                 {{-- <h2>{{date}}</h2> --}}
                 <br>
                 {{-- <p>You are currently incharge of {{numPatients}} patients.</p> --}}
-                <p>Your patient's latest logs are displayed on the right. Click on patient name to access individual
-                    profiles.</p>
                 <p>Welcome Dr. {{ $name }} </p>
                 <div>
                     <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
