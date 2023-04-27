@@ -8,7 +8,7 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ChartJSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,8 +101,10 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 
 
 // Route::get('/patientOverview', function () {
-    
+
 //     $notes = Note::latest()->paginate(5);
 //     return view('patientOverview',compact('notes'));
 // });
 Route::resource('/doc', DoctorController::class);
+
+Route::get('chart', [ChartJSController::class, 'index']);

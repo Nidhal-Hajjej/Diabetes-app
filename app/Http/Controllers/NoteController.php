@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\Measurement;
+use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
+use DB;
 
 class NoteController extends Controller
 {
@@ -15,10 +18,22 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::latest()->paginate(5);
-        $measurements = Measurement::latest()->paginate(10);
-        // dd($notes);
-        return view('patientOverview', compact('notes', "measurements"));
+        // $notes = Note::where("patient_id", 9)->latest()->paginate(5);
+        // $patient = Patient::find(1);
+        // $measurements = Measurement::where('patient_id', 9)->get();
+
+        // $users = Measurement::select(DB::raw("bloodLevel as count"), DB::raw("DAYNAME(created_at) as day_name"))
+        //             ->where('patient_id', 9)
+        //             ->whereYear('created_at', date('Y'))
+        //             ->groupBy(DB::raw("day_name"), DB::raw("bloodLevel"))
+        //             ->orderBy('id', 'ASC')
+        //             ->pluck('count', 'day_name');
+
+        // $labels = $users->keys();
+        // $data = $users->values();
+
+        // // dd($notes);
+        // return view('patientOverview', compact('notes', 'labels', 'data'));
     }
 
     /**
@@ -57,6 +72,22 @@ class NoteController extends Controller
     public function show($id)
     {
         //
+        $notes = Note::where("patient_id", $id)->latest()->paginate(5);
+        $patient = Patient::find($id);
+        $measurements = Measurement::where('patient_id', $id)->get();
+
+        $users = Measurement::select(DB::raw("bloodLevel as count"), DB::raw("DAYNAME(created_at) as day_name"))
+                    ->where('patient_id', $id)
+                    ->whereYear('created_at', date('Y'))
+                    ->groupBy(DB::raw("day_name"), DB::raw("bloodLevel"))
+                    ->orderBy('id', 'ASC')
+                    ->pluck('count', 'day_name');
+
+        $labels = $users->keys();
+        $data = $users->values();
+
+        // dd($notes);
+        return view('patientOverview', compact('notes', 'labels', 'data'));
     }
 
     /**

@@ -18,6 +18,8 @@ return new class () extends Migration {
             $table->integer('weight');
             $table->integer('exercise');
             $table->integer('insulinDoses');
+            $table->unsignedBigInteger('patient_id')->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients')->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class DoctorController extends Controller
     {
         //
         // $doctor = Doctor::where("id", 1);
-        $patients = Patient::where("doctor_id", 1)->get()->toArray();
+        $patients = Patient::where("doctor_id", 9)->get()->toArray();
         // dd($patients);
         return view("clinicianDashboard", compact('patients'));
     }

@@ -17,11 +17,11 @@ class NoteSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             Note::create([
-                'patientId' =>$faker->randomDigit,
+                'patient_id' => $faker->numberBetween(1, 9),
                 'comment' =>$faker->sentence,
-                'color' =>$faker->randomElement(['dark-yellow', 'light-yellow', 'dark-pink', 'light-pink']),    
+                'color' =>$faker->randomElement(['dark-yellow', 'light-yellow', 'dark-pink', 'light-pink']),
             ]);
         };
     }

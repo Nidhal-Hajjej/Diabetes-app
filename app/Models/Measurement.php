@@ -13,5 +13,6 @@ class Measurement extends Model
         'exercise',
         'weight',
         'insulinDoses',
+        'patient_id',
     ];
 }

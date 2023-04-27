@@ -14,5 +14,6 @@ class Note extends Model
         'date',
         'comment',
         'color',
+        'patient_id',
     ];
 }
