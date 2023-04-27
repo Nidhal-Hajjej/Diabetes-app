@@ -128,3 +128,7 @@ Route::resource('/doc', DoctorController::class);
 Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
 
 Route::get('chart', [ChartJSController::class, 'index']);
+
+Route::get('/record', function () {
+    return view('record');
+});
