@@ -7,8 +7,6 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class DoctorController extends Controller
 {
     /**
@@ -22,12 +20,13 @@ class DoctorController extends Controller
         // $doctor = Doctor::where("id", 1);
         $user = Auth::user();
         $name = $user->name;
-        $patients = Patient::where("doctor_id", 1)->get()->toArray();
+        // $doctor = Doctor::where('first_name', $name)->get();
+        $patients = Patient::where("doctor_id", 11)->get()->toArray();
         // dd($patients);
         // return view("clinicianDashboard", compact('patients'));
         return view("clinicianDashboard", compact('name', 'patients'));
     }
-    
+
 
 //     public function clinicianDashboard()
 // {

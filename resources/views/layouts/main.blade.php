@@ -33,12 +33,11 @@
                     @if (!session('loggedIn'))
                         <a href="/" class="nav-link">Home</a>
                     @else
-                        @if (request()->is('diabetes', 'aboutWebsite'))
-                
-                    <a href="{{ session('userType') == 'doctor' ? '/doc' : '/patientDashboard' }}" class="nav-link">Dashboard</a>
-                
-                @endif
-                @endif
+                        @if (!request()->is('doc', 'patientDashboard'))
+                            <a href="{{ session('userType') == 'doctor' ? '/doc' : '/patientDashboard' }}"
+                                class="nav-link">Dashboard</a>
+                        @endif
+                    @endif
                 </li>
 
                 <li class="nav-item">
