@@ -46,10 +46,10 @@ if ($role === 'patient') {
     $patient->email = $validatedData['email'];
     $patient->password = Hash::make($validatedData['password']);
     $patient->screen_name = '';
-    $patient->dob = '';
+    $patient->dob = date('Y-m-d', mt_rand(strtotime('1970-01-01'), strtotime('2005-12-31')));
     $patient->bio = '';
-    $patient->engagement_rate = 0;
-    $patient->clinicianId = '';
+    
+    $patient->doctor_id = mt_rand(1, 10);
     $patient->supportMessage = '';
     $patient->measurements = null;
     $patient->save();
@@ -62,7 +62,7 @@ if ($role === 'patient') {
     $doctor->password = Hash::make($validatedData['password']);
     $doctor->screen_name = null;
     $doctor->dob = null;
-    $doctor->patients = null;
+    
     $doctor->save();
 }
 
