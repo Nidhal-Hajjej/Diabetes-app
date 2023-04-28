@@ -75,6 +75,10 @@ Route::get('/clinicianAccount', function () {
     return view('clinicianAccount');
 });
 
+Route::get('/clinician/create', function () {
+    return view('clinicianCreate');
+});
+
 Route::get('/clinicianDashboard', function () {
     return view('clinicianDashboard');
 });
