@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             PatientSeeder::class,
             NoteSeeder::class,
             MeasurementSeeder::class,
+            InvitationSeeder::class,
         ]);
     }
 }

@@ -62,9 +62,6 @@ Route::get('/clinicianAccount', function () {
     return view('clinicianAccount');
 });
 
-Route::get('/clinicianDashboard', function () {
-    return view('clinicianDashboard');
-});
 
 Route::get('/clinicianManage', function () { // nel8oha
     return view('clinicianManage');
@@ -111,9 +108,14 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 
 
 
-Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
 
-Route::get('chart', [ChartJSController::class, 'index']);
+Route::get('/diabetes', 'App\Http\Controllers\DiabetesController@index');
+Route::post('/diabetes', 'App\Http\Controllers\DiabetesController@index');
+
+
+Route::resource('/clinician/create', InvitationController::class);
+Route::post('/invitation/accept/{invitation}', 'InvitationController@accept')->name('invitation.accept');
+
 
 // Route::get('/record', function () {
 //     return view('record');
