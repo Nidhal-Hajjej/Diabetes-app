@@ -5,6 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Invitation;
 use App\Http\Requests\StoreInvitationRequest;
 use App\Http\Requests\UpdateInvitationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Doctor;
+use App\Models\Patient;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+
+
 
 class InvitationController extends Controller
 {
@@ -16,7 +25,17 @@ class InvitationController extends Controller
     public function index()
     {
         //
+        $doctor_id = session('id');
+        $user = Auth::user();
+        $name = $user->name;
+        $invitations = DB::table('invitations')
+        ->join('patients', 'invitations.patient_id', '=', 'patients.id')
+        ->where('invitations.doctor_id', $doctor_id)
+        ->select('invitations.patient_id', 'patients.dob', 'patients.bio')
+        ->get();
         
+        return view("clinicianCreate", compact('name', 'invitations'));
+
     }
 
     /**
@@ -28,6 +47,28 @@ class InvitationController extends Controller
     {
         //
     }
+
+    public function isDoctor($email, $password)
+    {
+        $doctor = Doctor::where('email', $email)->first();
+
+        if ($doctor && Hash::check($password, $doctor->password)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function accept(Invitation $invitation)
+{
+    $patient = Patient::find($invitation->patient_id);
+    $patient->doctor_id = auth()->user()->id; // Set the doctor_id to the currently authenticated user's ID
+    $patient->save();
+
+    $invitation->delete(); // Delete the invitation since it has been accepted
+    return redirect()->back()->with('success', 'Invitation accepted successfully!');
+}
+
 
     /**
      * Store a newly created resource in storage.

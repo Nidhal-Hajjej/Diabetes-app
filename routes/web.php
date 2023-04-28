@@ -3,6 +3,7 @@
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\InvitationController;
 use App\Models\Measurement;
 use App\Models\Note;
 use App\Models\Patient;
@@ -75,13 +76,6 @@ Route::get('/clinicianAccount', function () {
     return view('clinicianAccount');
 });
 
-Route::get('/clinician/create', function () {
-    return view('clinicianCreate');
-});
-
-Route::get('/clinicianDashboard', function () {
-    return view('clinicianDashboard');
-});
 
 Route::get('/clinicianManage', function () { // nel8oha
     return view('clinicianManage');
@@ -128,6 +122,13 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 // });
 Route::resource('/doc', DoctorController::class);
 
+
+
 Route::get('/diabetes', 'App\Http\Controllers\DiabetesController@index');
 Route::post('/diabetes', 'App\Http\Controllers\DiabetesController@index');
+
+
+Route::resource('/clinician/create', InvitationController::class);
+Route::post('/invitation/accept/{invitation}', 'InvitationController@accept')->name('invitation.accept');
+
 

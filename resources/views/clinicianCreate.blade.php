@@ -1,145 +1,72 @@
 @extends('layouts.main')
 
+
 @section('content')
-    <script src="../scripts/closeFlash.js"></script>
+<script src="../scripts/closeFlash.js"></script>
 
-    {{-- {{> flashSuccess}}
-    {{> flashError}} --}}
+{{-- {{> flashSuccess}}
+{{> flashError}} --}}
 
-    <div class="clinician-dashboard">
-        <div class="clinician-info-container">
-            <div class="clinician-info">
-                {{-- <h1>Hello, Dr.{{user.first_name}}</h1> --}}
-                {{-- <h2>{{date}}</h2> --}}
-                <br>
-                {{-- <p>You are currently incharge of {{numPatients}} patients.</p> --}}
-                <p>Welcome Dr. {{ $name }} </p>
-                <div>
-                    <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
-                        background="transparent" speed="1" loop autoplay></lottie-player>
-                </div>
-                <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New Patient</a></button>
-                <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your
-                        Account</a></button>
+<div class="clinician-dashboard" style="margin-bottom:20px; ">
+    <div class="clinician-info-container" style="margin-right : 100px;">
+        <div class="clinician-info">
+            {{-- <h1>Hello, Dr.{{user.first_name}}</h1> --}}
+            {{-- <h2>{{date}}</h2> --}}
+            <br>
+            {{-- <p>You are currently incharge of {{numPatients}} patients.</p> --}}
+            <p>Welcome Dr. {{ $name }} </p>
+            <div>
+                <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
+                    background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
-        </div>
-
-        <div class="clinician-table-container">
-            <table class="clinician-table-styled">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Blood Glucose(nmol/L)</th>
-                        <th>Weight(Kg)</th>
-                        <th>Doses of Insulin</th>
-                        <th>Step Count</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($patients as $patient)
-                        <tr style="cursor:pointer;" onclick="location.href='/notes/{{ $patient['id'] }}';">
-                            <th>{{ $patient['first_name'] }}</th>
-                            <th>{{ $patient['measurements']['bcg'] }}</th>
-                            <th>{{ $patient['measurements']['weight'] }}</th>
-                            <th>{{ $patient['measurements']['insulin'] }}</th>
-                            <th>{{ $patient['measurements']['exercise'] }}</th>
-                        </tr>
-                    @endforeach
-                    {{-- {{#each data}}
-                        <tr style="cursor:pointer;" onclick="location.href='manage-patient/{{this.patient._id}}';">
-                        <th><a href="manage-patient/{{this.patient._id}}"">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
-                        {{#if this.patient.measurements.bcg}}
-                        <th>
-                            {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
-                                {{this.bcg}}
-                            {{else}}
-                                {{#if this.patient.measurements.bcg.maximum}}
-                                    <p id ="red">{{this.bcg}}</p>
-                                {{else}}
-                                    {{this.bcg}}
-                                {{/if}}
-                            {{/if}}
-                            {{#if (isEmpty this.bcg)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        {{#if this.patient.measurements.weight}}
-                        <th>
-                            {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
-                                {{this.weight}}
-                            {{else}}
-                                {{#if this.patient.measurements.weight.maximum}}
-                                    <p id ="red">{{this.weight}}</p>     
-                                {{else}}
-                                    {{this.weight}}
-                                {{/if}}                    
-                            {{/if}}
-                            {{#if (isEmpty this.weight)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        {{#if this.patient.measurements.insulin}}
-                        <th>
-                            {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
-                                {{this.insulin}}
-                            {{else}}
-                                {{#if this.patient.measurements.insulin.maximum}}
-                                    <p id ="red">{{this.insulin}}</p>
-                                {{else}}
-                                    {{this.insulin}}
-                                {{/if}}    
-                            {{/if}}
-                            {{#if (isEmpty this.insulin)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        {{#if this.patient.measurements.exercise}}
-                        <th>
-                            {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
-                                {{this.exercise}}
-                            {{else}}
-                                {{#if this.patient.measurements.exercise.maximum}}
-                                    <p id ="red">{{this.exercise}}</p>
-                                {{else}}
-                                    {{this.exercise}}
-                                {{/if}}                      
-                            {{/if}}
-                            {{#if (isEmpty this.exercise)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        </tr>
-                        {{/each}} --}}
-                </tbody>
-            </table>
-
-            <div class="info">
-                <img src="../images/icons/info.svg" alt="info-sign">
-                <span class="info-text">
-                    Greyed-out fields: non-required measurements.
-                </span>
-            </div>
-
+            <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New
+                    Patient</a></button>
+            <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your
+                    Account</a></button>
         </div>
     </div>
+
+    <div class="patient-card ">
+        <div class="patient-card-label">
+            <h3>Leaderboard</h3>
+        </div>
+        <div class="patient-card-content">
+            <table class="leaderboard" style="width:300px;">
+                <tr>
+                    <th style="padding-right: 0.5 em">
+                        <p>Position</p>
+                    </th>
+                    <th>
+                        <p>Name & Lastname</p>
+                    </th>
+                    <th>
+                        <p>Date of Birth</p>
+                    </th>
+                    <th>
+                        <p>Accept/Deny</p>
+                    </th>
+
+                </tr>
+                @php($position=1)
+                @foreach ($invitations as $invitation)
+
+
+                <tr id="first">
+                    <td>{{ $position }}</td>
+                    <td>{{  $invitation->patient_id }}</td>
+                    <td>{{ $invitation->dob }}</td>
+                    <td><button type="button">Accept</button></td>
+                    <td><button type="button">Deny</button></td>
+                </tr>
+                @php($position++)
+                @endforeach
+
+            </table>
+        </div>
+
+
+
+
+    </div>
+</div>
 @endsection

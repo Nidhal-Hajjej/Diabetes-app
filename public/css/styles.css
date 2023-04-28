@@ -1406,7 +1406,7 @@ a {
     margin-top: -15%;
     display: flex;
     flex-wrap: wrap;
-    overflow-y: scroll;
+
 }
 
 .patient-card-content a {
