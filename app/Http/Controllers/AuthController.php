@@ -52,6 +52,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             session(['loggedIn' => true]);
             session(['userType' => 'patient']);
+            session(['id' => $patient->id]);
+            session(['name' => $patient->first_name . ' ' . $patient->last_name]);
+            session(['dob' => $patient->dob]);
+
+
             
         }
         // Authentication was successful for patient
@@ -65,6 +70,8 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             session(['loggedIn' => true]);
             session(['userType' => 'doctor']);
+            session(['id' => $doctor->id]);
+
             
         }
         // Authentication was successful for doctor
@@ -89,6 +96,9 @@ public function logout(Request $request) {
     // return redirect()->route('login');
     session()->forget('loggedIn');
     session()->forget('userType');
+    session()->forget('id');
+    session()->forget('name');
+    session()->forget('dob');
     Auth::logout();
     session()->flush();
     return redirect('/login');

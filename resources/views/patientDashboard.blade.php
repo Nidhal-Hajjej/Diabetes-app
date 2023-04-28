@@ -12,11 +12,13 @@
 
             <div id="patient-details">
                 <img src="\images\male-profile.jpg">
-                <p> Name : {{ $name }}
+                <p> Name : {{ session('name') }} </p>
 
-                </p>
+
+                {{-- {{singlePatient.first_name}} {{singlePatient.last_name}} --}}
+
                 {{-- <p><b>Screen Name:</b> {{singlePatient.screen_name}}</p> --}}
-                <p><b>DOB:</b>
+                <p><b>DOB: <br> {{ session('dob') }}</b>
                     {{-- {{dob}} --}}
                 </p>
                 {{-- <p><b>Bio:</b> {{singlePatient.bio}}</p> --}}
@@ -51,65 +53,66 @@
                 </div>
             </div>
 
-            <div class="patient-card">
-                <div class="patient-card-label">
-                    <h3>Messages</h3>
-                </div>
-                <div class="patient-card-content">
-                    <div class="msg-bubble msg-bubble-left">*
-                        <br>
-                        <i>- Dr.
-                            {{-- {{clinician.first_name}} --}}
-                        </i>
+            <<<<<<< HEAD======={{-- {{!-- Messages are hard coded for now. --}}>>>>>>> 6ba4c9a65bebad847005880f2be79c8c661594f6
+                <div class="patient-card">
+                    <div class="patient-card-label">
+                        <h3>Messages</h3>
+                    </div>
+                    <div class="patient-card-content">
+                        <div class="msg-bubble msg-bubble-left">*
+                            <br>
+                            <i>- Dr.
+                                {{-- {{clinician.first_name}} --}}
+                            </i>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="patient-card">
-                <div class="patient-card-label">
-                    <h3>Leaderboard</h3>
+                <div class="patient-card">
+                    <div class="patient-card-label">
+                        <h3>Leaderboard</h3>
+                    </div>
+                    <div class="patient-card-content">
+                        <table class="leaderboard">
+                            <tr>
+                                <th>
+                                    <p>Position</p>
+                                </th>
+                                <th>
+                                    <p>Name</p>
+                                </th>
+                                <th>
+                                    <p>Engagement Rate</p>
+                                </th>
+                            </tr>
+                            <tr id="first">
+                                <td>1</td>
+                                {{-- <td>{{entry.0.screen_name}}</td> --}}
+                                {{-- <td>{{entry.0.engagement_rate}}%</td> --}}
+                            </tr>
+                            <tr id="second">
+                                <td>2</td>
+                                {{-- <td>{{entry.1.screen_name}}</td> --}}
+                                {{-- <td>{{entry.1.engagement_rate}}%</td> --}}
+                            </tr>
+                            <tr id="third">
+                                <td>3</td>
+                                {{-- <td>{{entry.2.screen_name}}</td> --}}
+                                {{-- <td>{{entry.2.engagement_rate}}%</td> --}}
+                            </tr>
+                            <tr id="fourth">
+                                <td>4</td>
+                                {{-- <td>{{entry.3.screen_name}}</td> --}}
+                                {{-- <td>{{entry.3.engagement_rate}}%</td> --}}
+                            </tr>
+                            <tr id="fifth">
+                                <td>5</td>
+                                {{-- <td>{{entry.4.screen_name}}</td> --}}
+                                {{-- <td>{{entry.4.engagement_rate}}%</td> --}}
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div class="patient-card-content">
-                    <table class="leaderboard">
-                        <tr>
-                            <th>
-                                <p>Position</p>
-                            </th>
-                            <th>
-                                <p>Name</p>
-                            </th>
-                            <th>
-                                <p>Engagement Rate</p>
-                            </th>
-                        </tr>
-                        <tr id="first">
-                            <td>1</td>
-                            {{-- <td>{{entry.0.screen_name}}</td> --}}
-                            {{-- <td>{{entry.0.engagement_rate}}%</td> --}}
-                        </tr>
-                        <tr id="second">
-                            <td>2</td>
-                            {{-- <td>{{entry.1.screen_name}}</td> --}}
-                            {{-- <td>{{entry.1.engagement_rate}}%</td> --}}
-                        </tr>
-                        <tr id="third">
-                            <td>3</td>
-                            {{-- <td>{{entry.2.screen_name}}</td> --}}
-                            {{-- <td>{{entry.2.engagement_rate}}%</td> --}}
-                        </tr>
-                        <tr id="fourth">
-                            <td>4</td>
-                            {{-- <td>{{entry.3.screen_name}}</td> --}}
-                            {{-- <td>{{entry.3.engagement_rate}}%</td> --}}
-                        </tr>
-                        <tr id="fifth">
-                            <td>5</td>
-                            {{-- <td>{{entry.4.screen_name}}</td> --}}
-                            {{-- <td>{{entry.4.engagement_rate}}%</td> --}}
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </section>
     </section>
 
