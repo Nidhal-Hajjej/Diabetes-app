@@ -3,7 +3,7 @@
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MeasurementController;
-use App\Http\Controllers\NoteController;
+use Illuminate\Support\Facades\Session;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
