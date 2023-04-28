@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MeasurementController;
 use App\Http\Controllers\NoteController;
-use App\Models\Measurement;
-use App\Models\Note;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
@@ -26,22 +26,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-
-// Route::post('/login', function () {
-//     return view('login');
-// })->name('login');;
-
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route::get('/logout', function () {
-//     Auth::logout();
-//     return redirect('/login');
-// })->name('logout');
 Route::post('/logout', function () {
     Session::flush();
     Auth::logout();
@@ -109,7 +96,7 @@ Route::get('/patientComments', function () {
 // Route::get('/patientDashboard',
 // });
 
-Route::resource('/notes', NoteController::class);
+// Route::resource('/notes', NoteController::class);
 
 
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -122,14 +109,20 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 //     return view('patientOverview',compact('notes'));
 // });
 
-Route::resource('/doc', DoctorController::class);
 
-Route::resource('/patientDashboard', PatientController::class);
 
 Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
 
 Route::get('chart', [ChartJSController::class, 'index']);
 
-Route::get('/record', function () {
-    return view('record');
-});
+// Route::get('/record', function () {
+//     return view('record');
+// });
+
+Route::resource('/doc', DoctorController::class);
+
+Route::resource('/patientDashboard', PatientController::class);
+
+Route::resource('/patientRecord', MeasurementController::class);
+
+Route::post('/storeMeasurements', [MeasurementController::class, 'store']);

@@ -42,7 +42,7 @@
                         <li>Enter your insulin doses</li>
                         <br>
                     </ul>
-                    <a href="/record">Record measurements</a>
+                    <a href="/patientRecord">Record measurements</a>
                 </div>
             </div>
 
