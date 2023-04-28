@@ -1,24 +1,16 @@
 @extends('layouts.main')
 
 @section('content')
-    <script src="../scripts/closeFlash.js"></script>
-
-    {{-- {{> flashSuccess}}
-    {{> flashError}} --}}
-
     <div class="clinician-dashboard">
         <div class="clinician-info-container">
             <div class="clinician-info">
-                {{-- <h1>Hello, Dr.{{user.first_name}}</h1> --}}
-                {{-- <h2>{{date}}</h2> --}}
                 <br>
-                {{-- <p>You are currently incharge of {{numPatients}} patients.</p> --}}
                 <p>Welcome Dr. {{ $name }} </p>
                 <div>
                     <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
                         background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
-                <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New Patient</a></button>
+                <button type="clinician-button" id="clinician-button"><a href="/addNewPatient">Add New Patient</a></button>
                 <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your
                         Account</a></button>
             </div>

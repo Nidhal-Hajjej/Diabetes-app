@@ -106,9 +106,8 @@ Route::get('/patientComments', function () {
     return view('patientComments');
 });
 
-Route::get('/patientDashboard', function () {
-    return view('patientDashboard');
-});
+// Route::get('/patientDashboard',
+// });
 
 Route::resource('/notes', NoteController::class);
 
@@ -124,6 +123,7 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 // });
 Route::resource('/doc', DoctorController::class);
 
+Route::resource('/patientDashboard', PatientController::class);
 
 Route::post('/change-password', 'App\Http\Controllers\PatientController@updatePassword')->name('updatePassword');
 

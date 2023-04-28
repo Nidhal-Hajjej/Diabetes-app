@@ -14,95 +14,106 @@
             <div class="chart-toggle-container">
                 <h3>Filter chart by</h3>
                 <div class="chart-toggles">
-                    {{-- {{#if (isIn "bcg" required)}} --}}
+
                     <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "insulin" required)}} --}}
+
                     <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "weight" required)}} --}}
+
                     <button id="weight-toggle" class="inactive-toggle">Weight</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "exercise" required)}} --}}
+
                     <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
-                    {{-- {{/if}} --}}
+
                 </div>
-                <canvas id="myChart" height="100px"></canvas>
+                <canvas id="myChart" height="250px" width="700px"></canvas>
 
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script type="text/javascript">
-                    var labels = {{ Js::from($labels) }};
-                    var users = {{ Js::from($data) }};
+                    fetch('/api/getChartData/7/bloodLevel', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(response_data => {
+                            //console.log(response_data);
+                            var labels = response_data.labels;
+                            var users = response_data.data;
 
-                    const data = {
-                        labels: labels,
-                        datasets: [{
-                            label: 'My First dataset',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: users,
-                        }]
-                    };
+                            const data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: users,
+                                }]
+                            };
 
-                    const config = {
-                        type: 'line',
-                        data: data,
-                        options: {}
-                    };
+                            const config = {
+                                type: 'line',
+                                data: data,
+                                options: {}
+                            };
 
-                    const myChart = new Chart(
-                        document.getElementById('myChart'),
-                        config
-                    );
+                            const myChart = new Chart(
+                                document.getElementById('myChart'),
+                                config
+                            );
+                            //myChart.destroy();
+                        })
+
+                        .catch(error => {
+                            console.error(error);
+                        });
+
+                    function getChartData(id, attribut) {
+                        fetch(`/api/getChartData/${id}/${attribut}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(response_data => {
+                                console.log(response_data);
+                                var labels = response_data.labels;
+                                var users = response_data.data;
+
+                                const data = {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: '',
+                                        backgroundColor: 'rgb(255, 99, 132)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        data: users,
+                                    }]
+                                };
+
+                                const config = {
+                                    type: 'line',
+                                    data: data,
+                                    options: {}
+                                };
+
+                                const myChart = new Chart(
+                                    document.getElementById('myChart'),
+                                    config
+                                );
+
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    }
                 </script>
 
             </div>
 
-            {{-- <section class="patient-chart-section">
-                <div id="patient-chart-container"></div>
-            </section> --}}
 
-            {{-- <h1>All Data</h1>
-
-            <br>
-            <div class="patient-data-filters">
-                <select name="search-filter" id="search-filter">
-                    <option value="">Filter By</option>
-                    <option value="measurement">Measurement</option>
-                    <option value="value">Value</option>
-                    <option value="comment">Comment</option>
-                    <option value="time">Time</option>
-                </select>
-                <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
-            </div> --}}
-            {{-- BECH NE7I MEASUREMENTS MEN PATIENT OVERVIEW --}}
-            {{-- <div class="patient-data-container">
-                <table id="patient-data-table">
-                    <tr class="patient-data-header">
-                        <th>Measurement</th>
-                        <th>Value</th>
-                        <th>Comment</th>
-                        <th>Time Recorded</th>
-                    </tr>
-                    @foreach ($measurements as $measurement)
-                        <tr class="patient-data-row">
-                            <td>Blood Glucose Level</td>
-                            <td>{{ $measurement->bloodLevel }} nmol/L</td>
-                            <td>Weight</td>
-                            <td>{{ $measurement->weight }} kg</td>
-                            <td>Insulin Doses</td>
-                            <td>{{ $measurement->insulinDoses }} dose(s)</td>
-                            <td>Exercise</td>
-                            <td>{{ $measurement->exercise }} steps</td>
-                            <td> - </td>
-                            <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div> --}}
         </section>
 
         <section class="patient-notes flex-column-center">
@@ -115,14 +126,7 @@
                         <p>{{ $note->comment }}</p>
                         <br>
                         <p>{{ $note->date }}</p>
-                        {{-- <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
-                        <form action="/clinician/manage-patient/{{$note->patientId}}/delete-note" method="post" class="note-del-form">
-                            <input type="hidden" value={{$note->patientId}} name="pid">
-                            <input type="hidden" value=
-                                {{-- {{this._id}}  --}}
-                        {{-- name="nid"> --}}
-                        {{-- {{!-- <button type="submit" style="display: none;"></button> --}}
-                        {{-- </form>  --}}
+
                         <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
 
                             @csrf

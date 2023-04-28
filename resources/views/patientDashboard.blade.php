@@ -2,11 +2,6 @@
 
 @section('content')
     <script src="../scripts/loader.js"></script>
-    {{-- <div class="loader-wrapper" id="loader">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div> --}}
-
-    {{-- {{#if loggedIn}} --}}
 
     <div class="page-heading-1">
         <h1>Dashboard</h1>
@@ -14,16 +9,14 @@
 
     <section id="patient-dashboard">
         <section id="patient-dashboard-content">
-            
+
             <div id="patient-details">
                 <img src="\images\male-profile.jpg">
-                <p> Name :{{--  {{ $name }}  --}}
+                <p> Name : {{ $name }}
 
-
-                    {{-- {{singlePatient.first_name}} {{singlePatient.last_name}} --}}
                 </p>
                 {{-- <p><b>Screen Name:</b> {{singlePatient.screen_name}}</p> --}}
-                <p><b>DOB:</b> 
+                <p><b>DOB:</b>
                     {{-- {{dob}} --}}
                 </p>
                 {{-- <p><b>Bio:</b> {{singlePatient.bio}}</p> --}}
@@ -41,53 +34,31 @@
                     <h3>Reminders</h3>
                 </div>
                 <div class="patient-card-content">
-                    <p>G'Day, 
-                        {{-- {{singlePatient.first_name}}.  --}}
+                    <p>G'Day, {{ $name }},
                         Today you need to:</p>
                     <ul>
-                        {{-- {{#if singlePatient.measurements.bcg}}
-                            {{#if (isIn "bcg" notMeasured)}} --}}
-                                <li>Enter your blood glucose level</li>
-                            {{-- {{else}} --}}
-                                <li class="measured">Enter your blood glucose level</li>
-                            {{-- {{/if}} --}}
-                        {{-- {{/if}} --}}
-                        {{-- {{#if singlePatient.measurements.weight}} --}}
-                            {{-- {{#if (isIn "weight" notMeasured)}} --}}
-                                <li>Enter your weight</li>
-                            {{-- {{else}} --}}
-                                <li class="measured">Enter your weight</li>
-                            {{-- {{/if}} --}}
-                        {{-- {{/if}} --}}
-                        {{-- {{#if singlePatient.measurements.exercise}} --}}
-                            {{-- {{#if (isIn "exercise" notMeasured)}} --}}
-                                <li>Enter step count</li>
-                            {{-- {{else}} --}}
-                                <li class="measured">Enter step count</li>
-                            {{-- {{/if}} --}}
-                        {{-- {{/if}} --}}
-                        {{-- {{#if singlePatient.measurements.insulin}} --}}
-                            {{-- {{#if (isIn "insulin" notMeasured)}} --}}
-                                <li>Enter your insulin doses</li>
-                            {{-- {{else}} --}}
-                                <li class="measured">Enter your insulin doses</li>
-                            {{-- {{/if}} --}}
-                        {{-- {{/if}} --}}
+                        <br>
+                        <li>Enter your blood glucose level</li>
+                        <br>
+                        <li>Enter your weight</li>
+                        <br>
+                        <li>Enter step count</li>
+                        <br>
+                        <li>Enter your insulin doses</li>
+                        <br>
                     </ul>
                     <a href="/record">Record measurements</a>
                 </div>
             </div>
 
-            {{-- {{!-- Messages are hard coded for now. --}} --}}
             <div class="patient-card">
                 <div class="patient-card-label">
                     <h3>Messages</h3>
                 </div>
                 <div class="patient-card-content">
-                    <div class="msg-bubble msg-bubble-left">
-                        {{-- {{singlePatient.supportMessage}} --}}
+                    <div class="msg-bubble msg-bubble-left">*
                         <br>
-                        <i>- Dr. 
+                        <i>- Dr.
                             {{-- {{clinician.first_name}} --}}
                         </i>
                     </div>
