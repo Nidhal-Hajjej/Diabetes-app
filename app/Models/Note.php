@@ -10,8 +10,6 @@ class Note extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patientId',
-        'date',
         'comment',
         'color',
         'patient_id',

@@ -18,7 +18,6 @@ class Patient extends Model
         'bio',
         'doctor_id',
         'supportMessage',
-        'measurements',
     ];
 
     protected $casts = [
@@ -29,5 +28,5 @@ class Patient extends Model
         'password',
     ];
 
-    protected $table = 'patients';
+    // protected $table = 'patients';
 }

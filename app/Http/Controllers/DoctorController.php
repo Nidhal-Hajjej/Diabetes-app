@@ -7,8 +7,6 @@ use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class DoctorController extends Controller
 {
     /**
@@ -17,7 +15,7 @@ class DoctorController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        public function index()
+    public function index()
     {
         //
         // $doctor = Doctor::where("id", 1);
@@ -29,7 +27,7 @@ class DoctorController extends Controller
     }
 
 
-  
+
 
     /**
      * Show the form for creating a new resource.

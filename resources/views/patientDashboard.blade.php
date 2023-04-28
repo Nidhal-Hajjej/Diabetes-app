@@ -12,23 +12,16 @@
 
             <div id="patient-details">
                 <img src="\images\male-profile.jpg">
-                <p> Name : {{ session('name') }} </p>
-
-
-                {{-- {{singlePatient.first_name}} {{singlePatient.last_name}} --}}
-
-                {{-- <p><b>Screen Name:</b> {{singlePatient.screen_name}}</p> --}}
-                <p><b>DOB: <br> {{ session('dob') }}</b>
-                    {{-- {{dob}} --}}
+                <p> Name : <b> {{ session('name') }} </b> </p>
+                <br>
+                <p>
+                    DOB: <b> {{ session('dob') }}</b>
                 </p>
-                {{-- <p><b>Bio:</b> {{singlePatient.bio}}</p> --}}
                 <button><a href="account" style="color: white;">Account settings</a></button>
-                {{-- {{#if (gte singlePatient.engagement_rate 80)}} --}}
                 <div class="patient-badge">
                     <lottie-player id="trophyLottie" src="../images/lottie/trophy.json" autoplay loop>"></lottie-player>
-                    <p>80%+</p>
+                    <p></p>
                 </div>
-                {{-- {{/if}} --}}
             </div>
 
             <div class="patient-card">
@@ -53,66 +46,101 @@
                 </div>
             </div>
 
-            <<<<<<< HEAD======={{-- {{!-- Messages are hard coded for now. --}}>>>>>>> 6ba4c9a65bebad847005880f2be79c8c661594f6
+            @if (!$doctor_id)
                 <div class="patient-card">
                     <div class="patient-card-label">
                         <h3>Messages</h3>
                     </div>
                     <div class="patient-card-content">
-                        <div class="msg-bubble msg-bubble-left">*
+                        <div class="msg-bubble msg-bubble-left">
+                            <i>- Dr.</i>
+                        </div>
+                        <div class="msg-bubble msg-bubble-left">
+                            <p>Hello Patient</p>
                             <br>
-                            <i>- Dr.
-                                {{-- {{clinician.first_name}} --}}
-                            </i>
+                            <p> Here you will get your notes</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="patient-card">
                     <div class="patient-card-label">
-                        <h3>Leaderboard</h3>
+                        <h3>Doctors</h3>
                     </div>
-                    <div class="patient-card-content">
+                    <div class="patient-card-content" width='100px'>
                         <table class="leaderboard">
                             <tr>
-                                <th>
+                                {{-- <th>
                                     <p>Position</p>
-                                </th>
-                                <th>
+                                </th> --}}
+                                <th style="margin: 25px 50px;">
                                     <p>Name</p>
                                 </th>
                                 <th>
-                                    <p>Engagement Rate</p>
+                                    <p>Email</p>
                                 </th>
                             </tr>
-                            <tr id="first">
-                                <td>1</td>
-                                {{-- <td>{{entry.0.screen_name}}</td> --}}
-                                {{-- <td>{{entry.0.engagement_rate}}%</td> --}}
+                            @foreach ($doctors as $doctor)
+                                <?php
+                                $my_array = ['first', 'second', 'third', 'fourth', 'fifth'];
+                                $random_key = array_rand($my_array);
+                                $random_value = $my_array[$random_key];
+                                $i = 0;
+                                ?>
+
+                                <tr id={{ $random_value }}>
+                                    {{-- <td>{{ $i }}</td> --}}
+                                    <td>{{ $doctor->first_name }} </td>
+                                    <td>{{ $doctor->email }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                        <div class="">
+                            {{ $doctors->links() }}
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="patient-card">
+                    <div class="patient-card-label">
+                        <h3>Messages</h3>
+                    </div>
+                    <div class="patient-card-content">
+                        <div class="msg-bubble msg-bubble-left">
+                            <i>- Dr.{{ $doctor->first_name }} {{ $doctor->last_name }}</i>
+                        </div>
+                        <div class="note-container">
+                            <p>{{ $note->comment }}</p>
+                            <br>
+                            <p>{{ $note->created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="patient-card">
+                    <div class="patient-card-label">
+                        <h3>My Doctor</h3>
+                    </div>
+                    <div class="patient-card-content" style="width:28em">
+                        <table class="leaderboard">
+                            <tr>
+                                <th style="padding-right: 0.5em">
+                                    <p> Name </p>
+                                </th>
+                                <th style="padding-right: 0.5em">
+                                    <p> Date Of Birth </p>
+                                </th>
+                                <th style="padding-right: 0.5em">
+                                    <p> Email </p>
+                                </th>
                             </tr>
-                            <tr id="second">
-                                <td>2</td>
-                                {{-- <td>{{entry.1.screen_name}}</td> --}}
-                                {{-- <td>{{entry.1.engagement_rate}}%</td> --}}
-                            </tr>
-                            <tr id="third">
-                                <td>3</td>
-                                {{-- <td>{{entry.2.screen_name}}</td> --}}
-                                {{-- <td>{{entry.2.engagement_rate}}%</td> --}}
-                            </tr>
-                            <tr id="fourth">
-                                <td>4</td>
-                                {{-- <td>{{entry.3.screen_name}}</td> --}}
-                                {{-- <td>{{entry.3.engagement_rate}}%</td> --}}
-                            </tr>
-                            <tr id="fifth">
-                                <td>5</td>
-                                {{-- <td>{{entry.4.screen_name}}</td> --}}
-                                {{-- <td>{{entry.4.engagement_rate}}%</td> --}}
+                            <tr>
+                                <td> {{ $doctor->first_name }} {{ $doctor->last_name }}</td>
+                                <td> {{ $doctor->dob }} </td>
+                                <td> {{ $doctor->email }} </td>
                             </tr>
                         </table>
                     </div>
                 </div>
+            @endif
         </section>
     </section>
 

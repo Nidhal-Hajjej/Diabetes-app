@@ -125,7 +125,7 @@
                     <div class="note-container {{ $note->color }}">
                         <p>{{ $note->comment }}</p>
                         <br>
-                        <p>{{ $note->date }}</p>
+                        <p>{{ $note->created_at }}</p>
 
                         <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
 

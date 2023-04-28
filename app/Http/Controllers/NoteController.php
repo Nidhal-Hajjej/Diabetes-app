@@ -73,6 +73,7 @@ class NoteController extends Controller
     {
         //
         $notes = Note::where("patient_id", $id)->latest()->paginate(5);
+
         return view('patientOverview', compact('notes'));
     }
     public function getChartData($id, $attribut)

@@ -121,6 +121,7 @@ Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmai
 //     $notes = Note::latest()->paginate(5);
 //     return view('patientOverview',compact('notes'));
 // });
+
 Route::resource('/doc', DoctorController::class);
 
 Route::resource('/patientDashboard', PatientController::class);

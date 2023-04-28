@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,15 @@ class PatientController extends Controller
         $name = $user->name;
         $patient_id = session('id');
 
+        $doctor_id= Patient::where('id', $patient_id)->value('doctor_id');
+        $doctor = Doctor::where('id', $doctor_id)->first();
 
-        return view("patientDashboard", compact('name'));
-        // return view("patientDashboard");
+        $note = Note::where('patient_id', $patient_id)->latest('created_at')->first();
+        // dd($note);
+
+        $doctors = Doctor::paginate(5);
+
+        return view("patientDashboard", compact('name', 'doctor_id', 'doctor', 'note', 'doctors'));
     }
     public function updatePassword(Request $request)
     {
