@@ -17,13 +17,13 @@
             
             <div id="patient-details">
                 <img src="\images\male-profile.jpg">
-                <p> Name :{{--  {{ $name }}  --}}
+                <p> Name : {{ session('name') }}  </p>
 
 
                     {{-- {{singlePatient.first_name}} {{singlePatient.last_name}} --}}
-                </p>
+                
                 {{-- <p><b>Screen Name:</b> {{singlePatient.screen_name}}</p> --}}
-                <p><b>DOB:</b> 
+                <p><b>DOB: <br> {{ session('dob') }}</b> 
                     {{-- {{dob}} --}}
                 </p>
                 {{-- <p><b>Bio:</b> {{singlePatient.bio}}</p> --}}
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            {{-- {{!-- Messages are hard coded for now. --}} --}}
+            {{-- {{!-- Messages are hard coded for now. --}} 
             <div class="patient-card">
                 <div class="patient-card-label">
                     <h3>Messages</h3>

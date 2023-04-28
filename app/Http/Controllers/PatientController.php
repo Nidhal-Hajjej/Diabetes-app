@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class PatientController extends Controller
 {
@@ -18,11 +20,14 @@ class PatientController extends Controller
      */
     public function index()
     {
+        
         $user = Auth::user();
-        $name = $user->name;
+        
+        
+        $patient_id = session('id');
 
 
-        return view("patientDashboard", compact('name'));
+        return view("patientDashboard");
     }
     public function updatePassword(Request $request)
 {
