@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InvitationController;
@@ -94,7 +95,7 @@ Route::get('/patientComments', function () {
 // Route::get('/patientDashboard',
 // });
 
-// Route::resource('/notes', NoteController::class);
+Route::resource('/notes', NoteController::class);
 
 
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

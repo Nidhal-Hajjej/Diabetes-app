@@ -28,100 +28,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($patients as $patient)
-                        <tr style="cursor:pointer;" onclick="location.href='/notes/{{ $patient['id'] }}';">
-                            <th>{{ $patient['first_name'] }}</th>
-                            <th>{{ $patient['measurements']['bcg'] }}</th>
-                            <th>{{ $patient['measurements']['weight'] }}</th>
-                            <th>{{ $patient['measurements']['insulin'] }}</th>
-                            <th>{{ $patient['measurements']['exercise'] }}</th>
+                    @foreach ($measurements as $measurement)
+                        <tr style="cursor:pointer;" onclick="location.href='/notes/{{ $measurement->patient_id }}';">
+                            <th>{{ $measurement->first_name }}</th>
+                            <th>{{ $measurement->bloodLevel }}</th>
+                            <th>{{ $measurement->weight }}</th>
+                            <th>{{ $measurement->insulinDoses }}</th>
+                            <th>{{ $measurement->exercise }}</th>
                         </tr>
                     @endforeach
-                    {{-- {{#each data}}
-                        <tr style="cursor:pointer;" onclick="location.href='manage-patient/{{this.patient._id}}';">
-                        <th><a href="manage-patient/{{this.patient._id}}"">{{this.patient.first_name}} {{this.patient.last_name}}</a></th>
-                        {{#if this.patient.measurements.bcg}}
-                        <th>
-                            {{#if (and (gte this.bcg this.patient.measurements.bcg.minimum) (lte this.bcg this.patient.measurements.bcg.maximum))}}
-                                {{this.bcg}}
-                            {{else}}
-                                {{#if this.patient.measurements.bcg.maximum}}
-                                    <p id ="red">{{this.bcg}}</p>
-                                {{else}}
-                                    {{this.bcg}}
-                                {{/if}}
-                            {{/if}}
-                            {{#if (isEmpty this.bcg)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
 
-                        {{#if this.patient.measurements.weight}}
-                        <th>
-                            {{#if (and (gte this.weight this.patient.measurements.weight.minimum) (lte this.weight this.patient.measurements.weight.maximum))}}
-                                {{this.weight}}
-                            {{else}}
-                                {{#if this.patient.measurements.weight.maximum}}
-                                    <p id ="red">{{this.weight}}</p>     
-                                {{else}}
-                                    {{this.weight}}
-                                {{/if}}                    
-                            {{/if}}
-                            {{#if (isEmpty this.weight)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        {{#if this.patient.measurements.insulin}}
-                        <th>
-                            {{#if (and (gte this.insulin this.patient.measurements.insulin.minimum) (lte this.insulin this.patient.measurements.insulin.maximum))}}
-                                {{this.insulin}}
-                            {{else}}
-                                {{#if this.patient.measurements.insulin.maximum}}
-                                    <p id ="red">{{this.insulin}}</p>
-                                {{else}}
-                                    {{this.insulin}}
-                                {{/if}}    
-                            {{/if}}
-                            {{#if (isEmpty this.insulin)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        {{#if this.patient.measurements.exercise}}
-                        <th>
-                            {{#if (and (gte this.exercise this.patient.measurements.exercise.minimum) (lte this.exercise this.patient.measurements.exercise.maximum))}}
-                                {{this.exercise}}
-                            {{else}}
-                                {{#if this.patient.measurements.exercise.maximum}}
-                                    <p id ="red">{{this.exercise}}</p>
-                                {{else}}
-                                    {{this.exercise}}
-                                {{/if}}                      
-                            {{/if}}
-                            {{#if (isEmpty this.exercise)}}
-                                <p id ="grey">Not updated</p>
-                            {{/if}}
-                        </th>
-                        {{else}}
-                        <th style="background-color: rgba(110, 107, 107, 0.404);"> 
-                        </th>
-                        {{/if}}
-
-                        </tr>
-                        {{/each}} --}}
                 </tbody>
             </table>
 

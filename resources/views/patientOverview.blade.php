@@ -24,51 +24,51 @@
                     <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
 
                 </div>
-                <canvas id="myChart" height="250px" width="700px"></canvas>
+                <canvas id="myChart" height="450px" width="850px"></canvas>
 
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script type="text/javascript">
-                    fetch('/api/getChartData/7/bloodLevel', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                        })
-                        .then(response => response.json())
-                        .then(response_data => {
-                            //console.log(response_data);
-                            var labels = response_data.labels;
-                            var users = response_data.data;
+                    // fetch('/api/getChartData/7/bloodLevel', {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //     })
+                    //     .then(response => response.json())
+                    //     .then(response_data => {
+                    //         //console.log(response_data);
+                    //         var labels = response_data.labels;
+                    //         var users = response_data.data;
 
-                            const data = {
-                                labels: labels,
-                                datasets: [{
-                                    label: '',
-                                    backgroundColor: 'rgb(255, 99, 132)',
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    data: users,
-                                }]
-                            };
+                    //         const data = {
+                    //             labels: labels,
+                    //             datasets: [{
+                    //                 label: '',
+                    //                 backgroundColor: 'rgb(255, 99, 132)',
+                    //                 borderColor: 'rgb(255, 99, 132)',
+                    //                 data: users,
+                    //             }]
+                    //         };
 
-                            const config = {
-                                type: 'line',
-                                data: data,
-                                options: {}
-                            };
+                    //         const config = {
+                    //             type: 'line',
+                    //             data: data,
+                    //             options: {}
+                    //         };
 
-                            const myChart = new Chart(
-                                document.getElementById('myChart'),
-                                config
-                            );
-                            //myChart.destroy();
-                        })
+                    //         const myChart = new Chart(
+                    //             document.getElementById('myChart'),
+                    //             config
+                    //         );
+                    //         //myChart.destroy();
+                    //     })
 
-                        .catch(error => {
-                            console.error(error);
-                        });
+                    //     .catch(error => {
+                    //         console.error(error);
+                    //     });
 
                     function getChartData(id, attribut) {
                         fetch(`/api/getChartData/${id}/${attribut}`, {
@@ -109,6 +109,7 @@
                                 console.error(error);
                             });
                     }
+                    getChartData(7, 'bloodLevel');
                 </script>
 
             </div>

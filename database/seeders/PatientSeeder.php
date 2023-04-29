@@ -28,12 +28,6 @@ class PatientSeeder extends Seeder
                 'dob' => $faker->date,
                 'bio' => $faker->paragraph,
                 'doctor_id' => $faker->numberBetween(1, 9),
-                'measurements' => [
-                    'bcg' => $faker->randomFloat(2, 0, 10),
-                    'weight' => $faker->randomFloat(2, 40, 60) ,
-                    'insulin' => $faker->randomFloat(2, 0, 10),
-                    'exercise' => $faker->randomFloat(2, 0, 30),
-                ],
             ]);
         }
     }

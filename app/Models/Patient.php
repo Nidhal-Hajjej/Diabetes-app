@@ -20,13 +20,8 @@ class Patient extends Model
         'supportMessage',
     ];
 
-    protected $casts = [
-        'measurements' => 'json',
-    ];
-
     protected $hidden = [
         'password',
     ];
 
-    // protected $table = 'patients';
 }
