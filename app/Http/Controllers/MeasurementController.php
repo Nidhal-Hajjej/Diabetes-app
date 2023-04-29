@@ -15,9 +15,10 @@ class MeasurementController extends Controller
      */
     public function index()
     {
-        $measurements = Measurement::latest()->paginate(10);
+        // $measurements = Measurement::latest()->paginate(10);
 
-        return view('patientOverview', compact('measurements'))->name("index");
+        // return view('patientOverview', compact('measurements'))->name("index");
+        return view('record');
     }
 
     /**
@@ -45,10 +46,20 @@ class MeasurementController extends Controller
             'weight'=> 'required',
             'insulinDoses'=> 'required',
         ]);
+        $patient_id = session('id');
 
-        Measurement::create($request->all());
+        $measurement = new Measurement();
+        $measurement->bloodLevel = $request->bloodLevel;
+        $measurement->exercise = $request->exercise;
+        $measurement->weight = $request->weight;
+        $measurement->insulinDoses = $request->insulinDoses;
+        $measurement->patient_id = $patient_id;
 
-        return redirect()->route('measurements.index');
+        $measurement->save();
+
+        // Measurement::create($request->all());
+
+        return redirect('/patientDashboard');
 
     }
 

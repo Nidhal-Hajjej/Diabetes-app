@@ -14,16 +14,15 @@
     <div class="page-heading-1">
         <h1>Record</h1>
         <hr class="divider">
-        <h2>        
-            Hello, 
+        <h2>
+            Hello,
             {{-- {{singlePatient.first_name}}.  --}}
-            It is now 
+            It is now
             {{-- {{currentTime}}. --}}
         </h2>
         <h2>
             In this page, you can record your health data. The data
-            that you are required to enter is listed below. These 
-            requirements are set by your clinician.
+            that you are required to enter is listed below.
         </h2>
         <hr class="divider">
     </div>
@@ -33,68 +32,35 @@
         <div class="checklist-container">
             <h3>Today's required measurements</h3>
 
-            {{-- {{#if singlePatient.measurements.bcg}} --}}
             <div class="requirement-checklist-item">
                 <p>blood glucose level</p>
-                {{-- {{#if (isIn "bcg" measured)}} --}}
-                    <img src="../images/icons/checked-2.svg" alt="circle">
-                {{-- {{else}}
-                    <img src="../images/icons/cross-filled.svg" alt="circle">
-                {{/if}} --}}
+                <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-            {{-- {{/if}} --}}
-
-            {{-- {{#if singlePatient.measurements.weight}} --}}
             <div class="requirement-checklist-item">
                 <p>weight</p>
-                {{-- {{#if (isIn "weight" measured)}} --}}
-                    <img src="../images/icons/checked-2.svg" alt="circle">
-                {{-- {{else}}
-                    <img src="../images/icons/cross-filled.svg" alt="circle">
-                {{/if}} --}}
+                <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-            {{-- {{/if}} --}}
 
-            {{-- {{#if singlePatient.measurements.exercise}} --}}
             <div class="requirement-checklist-item">
                 <p>exercise</p>
-                {{-- {{#if (isIn "exercise" measured)}} --}}
-                    <img src="../images/icons/checked-2.svg" alt="circle">
-                {{-- {{else}}
-                    <img src="../images/icons/cross-filled.svg" alt="circle">
-                {{/if}} --}}
+                <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-            {{-- {{/if}} --}}
-
-            {{-- {{#if singlePatient.measurements.insulin}} --}}
             <div class="requirement-checklist-item">
                 <p>insulin doses</p>
-                {{-- {{#if (isIn "insulin" measured)}} --}}
-                    <img src="../images/icons/checked-2.svg" alt="circle">
-                {{-- {{else}}
-                    <img src="../images/icons/cross-filled.svg" alt="circle">
-                {{/if}} --}}
+                <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-            {{-- {{/if}} --}}
-            
+
         </div>
     </div>
 
-    <div class="reminder-section">
+    {{-- <div class="reminder-section">
         <div>
-        {{-- <div {{#if (isEmpty notMeasured)}} class="reminder-done" {{else}} class="reminder-container" {{/if}}> --}}
-            <div class="reminder-heading">          
-                {{-- {{#if (isEmpty notMeasured)}} --}}
+            <div class="reminder-heading">
                 <img src="../images/icons/smiley.svg" alt="smiley">
                 <h3>Good Job!</h3>
-                {{-- {{else}}
-                <img src="../images/icons/warning.svg" alt="warning-sign">
-                <h3>Reminder</h3>
-                {{/if}}           --}}
             </div>
-        
+
             <div class="reminder-text">
-                {{-- {{#if (isEmpty notMeasured)}} --}}
                 <p>
                     You have recorded all your measurements today.
                 </p>
@@ -102,30 +68,24 @@
                 <span>
                     Click <a href="/patient/dashboard">here</a> to return to dashboard.
                 </span>
-                {{-- {{else}} --}}
-                {{-- {{#each notMeasured}} --}}
                 <p>
-                    {{-- - {{#if (equals this "bcg")}} blood glucose level not yet recorded for today. {{else}} {{this}} not yet recorded for today. {{/if}} --}}
                 </p>
-                {{-- {{/each}} --}}
-                {{-- {{/if}}         --}}
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    {{-- {{#if singlePatient.measurements.bcg}}
-    {{#if (isIn "bcg" notMeasured)}} --}}
     <div class="record-container">
         <h2>Input your recorded blood glucose level for today</h2>
         <div class="record-form">
-            <form action="/storeMeasurements" method="post">  
+            <form action="/storeMeasurements" method="post">
                 @csrf
                 <div class="type-input">
                     <input type="text" name="bloodLevel" value="bloodLevel" readonly>
                 </div>
                 <span class="label">Blood Glucose Level</span>
                 <div class="record-input">
-                    <input name="bloodLevel" type="number" min=0 step=0.1 placeholder="Enter Blood Glucose Level" id="bloodLevel" required>
+                    <input name="bloodLevel" type="number" min=0 step=0.1 placeholder="Enter Blood Glucose Level"
+                        id="bloodLevel" required>
                 </div>
                 <br>
                 <div class="type-input">
@@ -142,7 +102,8 @@
                 <span class="label">Insulin Doses</span>
                 <div class="record-input">
                     <input name="insulinDoses" type="number" min=0 step=1
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Insulin doses" id="insulinDoses" required>
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Insulin doses"
+                        id="insulinDoses" required>
                 </div>
                 <br>
                 <div class="type-input">
@@ -150,87 +111,15 @@
                 </div>
                 <span class="label">Number Of Steps</span>
                 <div class="record-input">
-                    <input name="exercise" type="number" min=0 step=1 placeholder="Enter number of steps" id="exercise" required>
+                    <input name="exercise" type="number" min=0 step=1 placeholder="Enter number of steps" id="exercise"
+                        required>
                 </div>
                 <br>
                 <button class="record-button" id="bcg-btn">Submit</button>
             </form>
         </div>
     </div>
-    {{-- {{/if}}
-    {{/if}}
 
-    {{#if singlePatient.measurements.weight}}
-    {{#if (isIn "weight" notMeasured)}} --}}
-    {{-- <div class="record-container">
-        <h2>Input your recorded weight for today</h2>
-        <div class="record-form">
-            <form action="/patient/record" method="post">  
-                <div class="type-input">
-                    <input type="text" name="type" value="weight" readonly>
-                </div>
-                <span class="label">Weight</span>
-                <div class="record-input">
-                    <input name="value" type="number" min=0 step=0.1 placeholder="Enter Weight" id="weight" required>
-                </div>
-                <br>
-                <button class="record-button">Submit</button>
-            </form>
-        </div>
-    </div> --}}
-    {{-- {{/if}}
-    {{/if}}
-
-    {{#if singlePatient.measurements.insulin}}
-    {{#if (isIn "insulin" notMeasured)}} --}}
-    {{-- <div class="record-container">
-        <h2>Input number of insulin doses taken today</h2>
-        <div class="record-form">
-            <form action="/patient/record" method="post">  
-                <div class="type-input">
-                    <input type="text" name="type" value="insulin" readonly>
-                </div>
-                <span class="label">Insulin Doses</span>
-                <div class="record-input">
-                    <input name="value" type="number" min=0 step=1
-                    onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Insulin doses" id="insulin" required>
-                </div>
-                <br>
-                <button class="record-button">Submit</button>
-            </form>
-        </div>
-    </div> --}}
-    {{-- {{/if}}
-    {{/if}}
-
-    {{#if singlePatient.measurements.exercise}}
-    {{#if (isIn "exercise" notMeasured)}} --}}
-    {{-- <div class="record-container">
-        <h2>Input number of steps taken today</h2>
-        <div class="record-form">
-            <form action="/patient/record" method="post">  
-                <div class="type-input">
-                    <input type="text" name="type" value="exercise" readonly>
-                </div>
-                <span class="label">Number Of Steps</span>
-                <div class="record-input">
-                    <input name="value" type="number" min=0 placeholder="Enter number of steps" id="exercise" required>
-                </div>
-                <br>
-                <button class="record-button">Submit</button>
-            </form>
-        </div>
-    </div> --}}
-    {{-- {{/if}}
-    {{/if}} --}}
-
-    <button id="back-to-top-btn" title="Go to top"><img src="/images/icons/top.svg" style="width: 30px; height: 30px;" alt="back to top button"></button>
-
-    {{-- {{else}}
-
-    {{> loggedOut}}
-
-    {{/if}} --}}
-
+    <button id="back-to-top-btn" title="Go to top"><img src="/images/icons/top.svg" style="width: 30px; height: 30px;"
+            alt="back to top button"></button>
 @endsection
-    

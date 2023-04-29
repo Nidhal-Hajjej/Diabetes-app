@@ -21,11 +21,9 @@ return new class () extends Migration {
             $table->string('screen_name');
             $table->date('dob');
             $table->text('bio');
-            // $table->unsignedBigInteger('doctor_id')->default(mt_rand(1,10))->nullable();
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('id')->on('doctors')->nullOnDelete();
             $table->text('supportMessage')->nullable();
-            $table->json('measurements')->nullable();
             $table->timestamps();
         });
     }

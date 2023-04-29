@@ -14,95 +14,116 @@
             <div class="chart-toggle-container">
                 <h3>Filter chart by</h3>
                 <div class="chart-toggles">
-                    {{-- {{#if (isIn "bcg" required)}} --}}
-                    <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "insulin" required)}} --}}
-                    <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "weight" required)}} --}}
-                    <button id="weight-toggle" class="inactive-toggle">Weight</button>
-                    {{-- {{/if}} --}}
-                    {{-- {{#if (isIn "exercise" required)}} --}}
-                    <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
-                    {{-- {{/if}} --}}
+
+                    <button id="bcg-toggle" class="active-toggle" onclick="getTheWantedChart('bloodLevel')">Blood Glucose
+                        Level</button>
+
+                    <button id="insulin-toggle" class="inactive-toggle"
+                        onclick="getTheWantedChart('insulinDoses')">Insulin</button>
+
+                    <button id="weight-toggle" class="inactive-toggle" onclick="getTheWantedChart('weight')">Weight</button>
+
+                    <button id="exercise-toggle" class="inactive-toggle"
+                        onclick="getTheWantedChart('exercise')">Exercise</button>
+
                 </div>
-                <canvas id="myChart" height="100px"></canvas>
+                <canvas id="myChart" height="450px" width="850px"></canvas>
 
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script type="text/javascript">
-                    var labels = {{ Js::from($labels) }};
-                    var users = {{ Js::from($data) }};
+                    function generateChart(labels, users) {
+                        // Destroy any existing chart
+                        if (window.myChart) {
+                            window.myChart.destroy();
+                        }
 
-                    const data = {
-                        labels: labels,
-                        datasets: [{
-                            label: 'My First dataset',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: users,
-                        }]
-                    };
+                        // Create a new chart
+                        const data = {
+                            labels: labels,
+                            datasets: [{
+                                label: '',
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: users,
+                            }]
+                        };
 
-                    const config = {
-                        type: 'line',
-                        data: data,
-                        options: {}
-                    };
+                        const config = {
+                            type: 'line',
+                            data: data,
+                            options: {}
+                        };
 
-                    const myChart = new Chart(
-                        document.getElementById('myChart'),
-                        config
-                    );
+                        window.myChart = new Chart(
+                            document.getElementById('myChart'),
+                            config
+                        );
+                    }
+
+                    function getTheWantedChart(attribut) {
+                        fetch(`/api/getChartData/{{ $id }}/${attribut}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(response_data => {
+                                var labels = response_data.labels;
+                                var users = response_data.data;
+                                generateChart(labels, users);
+
+                            })
+
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    }
+                    fetch(`/api/getChartData/{{ $id }}/bloodLevel`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(response_data => {
+                            console.log(response_data);
+                            var labels = response_data.labels;
+                            var users = response_data.data;
+
+                            const data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: users,
+                                }]
+                            };
+
+                            const config = {
+                                type: 'line',
+                                data: data,
+                                options: {}
+                            };
+
+                            window.myChart = new Chart(
+                                document.getElementById('myChart'),
+                                config
+                            );
+
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
                 </script>
 
             </div>
 
-            {{-- <section class="patient-chart-section">
-                <div id="patient-chart-container"></div>
-            </section> --}}
 
-            {{-- <h1>All Data</h1>
-
-            <br>
-            <div class="patient-data-filters">
-                <select name="search-filter" id="search-filter">
-                    <option value="">Filter By</option>
-                    <option value="measurement">Measurement</option>
-                    <option value="value">Value</option>
-                    <option value="comment">Comment</option>
-                    <option value="time">Time</option>
-                </select>
-                <input type="text" id="pd-search-input" onkeyup="search()" placeholder="Search for measurements.">
-            </div> --}}
-            {{-- BECH NE7I MEASUREMENTS MEN PATIENT OVERVIEW --}}
-            {{-- <div class="patient-data-container">
-                <table id="patient-data-table">
-                    <tr class="patient-data-header">
-                        <th>Measurement</th>
-                        <th>Value</th>
-                        <th>Comment</th>
-                        <th>Time Recorded</th>
-                    </tr>
-                    @foreach ($measurements as $measurement)
-                        <tr class="patient-data-row">
-                            <td>Blood Glucose Level</td>
-                            <td>{{ $measurement->bloodLevel }} nmol/L</td>
-                            <td>Weight</td>
-                            <td>{{ $measurement->weight }} kg</td>
-                            <td>Insulin Doses</td>
-                            <td>{{ $measurement->insulinDoses }} dose(s)</td>
-                            <td>Exercise</td>
-                            <td>{{ $measurement->exercise }} steps</td>
-                            <td> - </td>
-                            <td><img src="/images/icons/note.svg" alt="note-pen" id="copy-to-note"></td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div> --}}
         </section>
 
         <section class="patient-notes flex-column-center">
@@ -114,15 +135,8 @@
                     <div class="note-container {{ $note->color }}">
                         <p>{{ $note->comment }}</p>
                         <br>
-                        <p>{{ $note->date }}</p>
-                        {{-- <img src="/images/icons/close-note.svg" alt="close-button" class="note-del-btn">
-                        <form action="/clinician/manage-patient/{{$note->patientId}}/delete-note" method="post" class="note-del-form">
-                            <input type="hidden" value={{$note->patientId}} name="pid">
-                            <input type="hidden" value=
-                                {{-- {{this._id}}  --}}
-                        {{-- name="nid"> --}}
-                        {{-- {{!-- <button type="submit" style="display: none;"></button> --}}
-                        {{-- </form>  --}}
+                        <p>{{ $note->created_at }}</p>
+
                         <form action="{{ route('notes.destroy', $note->id) }}" method="POST">
 
                             @csrf

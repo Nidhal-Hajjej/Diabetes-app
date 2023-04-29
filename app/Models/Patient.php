@@ -18,16 +18,10 @@ class Patient extends Model
         'bio',
         'doctor_id',
         'supportMessage',
-        'measurements',
-    ];
-
-    protected $casts = [
-        'measurements' => 'json',
     ];
 
     protected $hidden = [
         'password',
     ];
 
-    protected $table = 'patients';
 }

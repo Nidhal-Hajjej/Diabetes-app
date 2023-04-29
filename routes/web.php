@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\NoteController;
-use App\Http\Controllers\InvitationController;
-use App\Models\Measurement;
-use App\Models\Note;
+
+use Illuminate\Support\Facades\Session;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChartJSController;
+use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,22 +28,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-
-// Route::post('/login', function () {
-//     return view('login');
-// })->name('login');;
-
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Route::get('/logout', function () {
-//     Auth::logout();
-//     return redirect('/login');
-// })->name('logout');
 Route::post('/logout', function () {
     Session::flush();
     Auth::logout();
@@ -104,9 +92,8 @@ Route::get('/patientComments', function () {
     return view('patientComments');
 });
 
-Route::get('/patientDashboard', function () {
-    return view('patientDashboard');
-});
+// Route::get('/patientDashboard',
+// });
 
 Route::resource('/notes', NoteController::class);
 
@@ -114,21 +101,19 @@ Route::resource('/notes', NoteController::class);
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 
-
-// Route::get('/patientOverview', function () {
-
-//     $notes = Note::latest()->paginate(5);
-//     return view('patientOverview',compact('notes'));
-// });
-Route::resource('/doc', DoctorController::class);
-
-
-
 Route::get('/diabetes', 'App\Http\Controllers\DiabetesController@index');
 Route::post('/diabetes', 'App\Http\Controllers\DiabetesController@index');
 
 
-Route::resource('/clinician/create', InvitationController::class);
-Route::post('/invitation/accept/{invitation}', 'InvitationController@accept')->name('invitation.accept');
+Route::resource('/doc', DoctorController::class);
 
+Route::resource('/patientDashboard', PatientController::class);
 
+Route::resource('/patientRecord', MeasurementController::class);
+
+Route::post('/storeMeasurements', [MeasurementController::class, 'store']);
+
+Route::resource('/addNewPatient', InvitationController::class);
+
+Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
+Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
