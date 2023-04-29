@@ -12,9 +12,6 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-
-
-
 class InvitationController extends Controller
 {
     /**
@@ -28,12 +25,15 @@ class InvitationController extends Controller
         $doctor_id = session('id');
         $user = Auth::user();
         $name = $user->name;
+
         $invitations = DB::table('invitations')
-        ->join('patients', 'invitations.patient_id', '=', 'patients.id')
-        ->where('invitations.doctor_id', $doctor_id)
-        ->select('invitations.patient_id', 'patients.dob', 'patients.bio')
-        ->get();
-        
+                    ->join('patients', 'invitations.patient_id', '=', 'patients.id')
+                    ->where('invitations.doctor_id', $doctor_id)
+                    ->select('invitations.id', 'invitations.patient_id', 'patients.dob', 'patients.bio')
+                    ->get();
+
+        // $invitations = Invitation::all();
+        // dd($invitations);
         return view("clinicianCreate", compact('name', 'invitations'));
 
     }
@@ -48,34 +48,31 @@ class InvitationController extends Controller
         //
     }
 
-    public function isDoctor($email, $password)
+    public function accept(Request $request, Invitation $invitation)
     {
-        $doctor = Doctor::where('email', $email)->first();
+        // Add the doctor ID to the patient table
+        $patient = Patient::find($invitation->patient_id);
+        $patient->doctor_id = $invitation->doctor_id;
+        $patient->save();
 
-        if ($doctor && Hash::check($password, $doctor->password)) {
-            return true;
-        }
+        // Delete the invitation
+        $invitation->delete();
 
-        return false;
+        return redirect()->back()->with('success', 'Invitation accepted');
     }
 
-    public function accept(Invitation $invitation)
-{
-    $patient = Patient::find($invitation->patient_id);
-    $patient->doctor_id = auth()->user()->id; // Set the doctor_id to the currently authenticated user's ID
-    $patient->save();
-
-    $invitation->delete(); // Delete the invitation since it has been accepted
-    return redirect()->back()->with('success', 'Invitation accepted successfully!');
-}
-
+    public function deny(Request $request, Invitation $invitation)
+    {
+        $invitation->delete();
+        return redirect()->back()->with('success', 'Invitation denied');
+    }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreInvitationRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+         * Store a newly created resource in storage.
+         *
+         * @param  \App\Http\Requests\StoreInvitationRequest  $request
+         * @return \Illuminate\Http\Response
+         */
     public function store(StoreInvitationRequest $request)
     {
         //

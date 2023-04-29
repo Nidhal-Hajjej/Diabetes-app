@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\MeasurementController;
+
 use Illuminate\Support\Facades\Session;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChartJSController;
+use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,27 +100,9 @@ Route::get('/patientComments', function () {
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('/forgot-password', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 
-
-// Route::get('/patientOverview', function () {
-
-//     $notes = Note::latest()->paginate(5);
-//     return view('patientOverview',compact('notes'));
-// });
-
-
-
-
 Route::get('/diabetes', 'App\Http\Controllers\DiabetesController@index');
 Route::post('/diabetes', 'App\Http\Controllers\DiabetesController@index');
 
-
-Route::resource('/clinician/create', InvitationController::class);
-Route::post('/invitation/accept/{invitation}', 'InvitationController@accept')->name('invitation.accept');
-
-
-// Route::get('/record', function () {
-//     return view('record');
-// });
 
 Route::resource('/doc', DoctorController::class);
 
@@ -128,3 +111,8 @@ Route::resource('/patientDashboard', PatientController::class);
 Route::resource('/patientRecord', MeasurementController::class);
 
 Route::post('/storeMeasurements', [MeasurementController::class, 'store']);
+
+Route::resource('/addNewPatient', InvitationController::class);
+
+Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
+Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
