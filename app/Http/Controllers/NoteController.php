@@ -74,24 +74,32 @@ class NoteController extends Controller
         //
         $notes = Note::where("patient_id", $id)->latest()->paginate(5);
 
-        return view('patientOverview', compact('notes'));
+        return view('patientOverview', compact('notes', 'id'));
     }
     public function getChartData($id, $attribut)
     {
-        $users = Measurement::select(DB::raw("$attribut as count"), DB::raw("DAYNAME(created_at) as day_name"))
-                    ->where('patient_id', $id)
-                    ->whereYear('created_at', date('Y'))
-                    ->groupBy(DB::raw("day_name"), DB::raw("$attribut"))
-                    ->orderBy('created_at', 'ASC')
-                    // ->orderByDesc('created_at')
-                    // ->take(3)
-                    ->pluck('count', 'day_name');
-
-        $labels = $users->keys();
+        // $users = Measurement::select(DB::raw("$attribut as count"), DB::raw("DAYNAME(created_at) as day_name"))
+        //             ->where('patient_id', $id)
+        //             ->whereYear('created_at', date('Y'))
+        //             //->groupBy(DB::raw("day_name"), DB::raw("$attribut"))
+        //             ->orderBy('created_at', 'ASC')
+        //             // ->orderByDesc('created_at')
+        //             // ->take(3)
+        //             ->pluck('count', 'day_name');
+        $users = DB::select("SELECT DAYNAME(created_at) as dayname, $attribut FROM `measurements` WHERE patient_id=$id ORDER by created_at DESC limit 7");
+        //dd($users);
+        $labels = [];
+        $label_values = [];
+        foreach($users as $value) {
+            $labels[] = $value->dayname;
+            $label_values[] = $value->$attribut;
+        }
+        $labels = array_reverse($labels);
         // $labels=array_reverse($labels);
-        $labels_values = $users->values();
+        $label_values = array_reverse($label_values);
+        //dd($labels, $labels_values);
         $data = ['labels' => $labels,
-                'data'=>$labels_values
+                'data'=>$label_values
             ];
         // $data=array_reverse($data);
         // dd($labels, $data);

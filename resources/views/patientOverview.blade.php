@@ -15,13 +15,16 @@
                 <h3>Filter chart by</h3>
                 <div class="chart-toggles">
 
-                    <button id="bcg-toggle" class="active-toggle">Blood Glucose Level</button>
+                    <button id="bcg-toggle" class="active-toggle" onclick="getTheWantedChart('bloodLevel')">Blood Glucose
+                        Level</button>
 
-                    <button id="insulin-toggle" class="inactive-toggle">Insulin</button>
+                    <button id="insulin-toggle" class="inactive-toggle"
+                        onclick="getTheWantedChart('insulinDoses')">Insulin</button>
 
-                    <button id="weight-toggle" class="inactive-toggle">Weight</button>
+                    <button id="weight-toggle" class="inactive-toggle" onclick="getTheWantedChart('weight')">Weight</button>
 
-                    <button id="exercise-toggle" class="inactive-toggle">Exercise</button>
+                    <button id="exercise-toggle" class="inactive-toggle"
+                        onclick="getTheWantedChart('exercise')">Exercise</button>
 
                 </div>
                 <canvas id="myChart" height="450px" width="850px"></canvas>
@@ -31,47 +34,37 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script type="text/javascript">
-                    // fetch('/api/getChartData/7/bloodLevel', {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             'Content-Type': 'application/json'
-                    //         },
-                    //     })
-                    //     .then(response => response.json())
-                    //     .then(response_data => {
-                    //         //console.log(response_data);
-                    //         var labels = response_data.labels;
-                    //         var users = response_data.data;
+                    function generateChart(labels, users) {
+                        // Destroy any existing chart
+                        if (window.myChart) {
+                            window.myChart.destroy();
+                        }
 
-                    //         const data = {
-                    //             labels: labels,
-                    //             datasets: [{
-                    //                 label: '',
-                    //                 backgroundColor: 'rgb(255, 99, 132)',
-                    //                 borderColor: 'rgb(255, 99, 132)',
-                    //                 data: users,
-                    //             }]
-                    //         };
+                        // Create a new chart
+                        const data = {
+                            labels: labels,
+                            datasets: [{
+                                label: '',
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: users,
+                            }]
+                        };
 
-                    //         const config = {
-                    //             type: 'line',
-                    //             data: data,
-                    //             options: {}
-                    //         };
+                        const config = {
+                            type: 'line',
+                            data: data,
+                            options: {}
+                        };
 
-                    //         const myChart = new Chart(
-                    //             document.getElementById('myChart'),
-                    //             config
-                    //         );
-                    //         //myChart.destroy();
-                    //     })
+                        window.myChart = new Chart(
+                            document.getElementById('myChart'),
+                            config
+                        );
+                    }
 
-                    //     .catch(error => {
-                    //         console.error(error);
-                    //     });
-
-                    function getChartData(id, attribut) {
-                        fetch(`/api/getChartData/${id}/${attribut}`, {
+                    function getTheWantedChart(attribut) {
+                        fetch(`/api/getChartData/{{ $id }}/${attribut}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -79,37 +72,53 @@
                             })
                             .then(response => response.json())
                             .then(response_data => {
-                                console.log(response_data);
                                 var labels = response_data.labels;
                                 var users = response_data.data;
-
-                                const data = {
-                                    labels: labels,
-                                    datasets: [{
-                                        label: '',
-                                        backgroundColor: 'rgb(255, 99, 132)',
-                                        borderColor: 'rgb(255, 99, 132)',
-                                        data: users,
-                                    }]
-                                };
-
-                                const config = {
-                                    type: 'line',
-                                    data: data,
-                                    options: {}
-                                };
-
-                                const myChart = new Chart(
-                                    document.getElementById('myChart'),
-                                    config
-                                );
+                                generateChart(labels, users);
 
                             })
+
                             .catch(error => {
                                 console.error(error);
                             });
                     }
-                    getChartData(7, 'bloodLevel');
+                    fetch(`/api/getChartData/{{ $id }}/bloodLevel`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(response_data => {
+                            console.log(response_data);
+                            var labels = response_data.labels;
+                            var users = response_data.data;
+
+                            const data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: users,
+                                }]
+                            };
+
+                            const config = {
+                                type: 'line',
+                                data: data,
+                                options: {}
+                            };
+
+                            window.myChart = new Chart(
+                                document.getElementById('myChart'),
+                                config
+                            );
+
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
                 </script>
 
             </div>
