@@ -12,7 +12,7 @@
     <script src="../scripts/preventScroll.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>Diabetes@Home</title>
-    
+
 
 </head>
 
@@ -21,29 +21,20 @@
         <nav class="navbar">
             <a href="/" class="logo"><span style="color:black">D</span>@H</a>
             <ul class="nav-menu">
-                {{-- {{#if loggedIn}}
-                <li class="nav-item">
-                    <a href="/patient/dashboard" class="nav-link">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/patient/data" class="nav-link">Your Data</a>
-                </li>
-                {{else}} --}}
 
                 <li class="nav-item">
                     @if (!session('loggedIn'))
                         <a href="/" class="nav-link">Home</a>
                     @else
                         @if (!request()->is('doc', 'patientDashboard'))
-                
-                    <a href="{{ session('userType') == 'doctor' ? '/doc' : '/patientDashboard' }}" class="nav-link">Dashboard</a>
-                
-                @endif
-                @endif
+                            <a href="{{ session('userType') == 'doctor' ? '/doc' : '/patientDashboard' }}"
+                                class="nav-link">Dashboard</a>
+                        @endif
+                    @endif
                 </li>
 
                 <li class="nav-item">
-                    <a href="/diabetes" class="nav-link">Diabetes</a>
+                    <a href="/aboutDiabetes" class="nav-link">Diabetes</a>
                 </li>
 
                 <li class="nav-item">

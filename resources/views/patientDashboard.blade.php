@@ -1,7 +1,23 @@
 @extends('layouts.main')
 
 @section('content')
-    <script src="../scripts/loader.js"></script>
+    <script>
+        function saveDoctor(doctor_id) {
+            fetch(`/api/sendDoctorInvitation/${doctor_id}/{{ session('id') }}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // body: JSON.stringify({
+                    //     name: 'John Doe',
+                    //     email: 'john@example.com'
+                    // })
+                })
+                .then(response => response.json())
+                .then(data => location.reload())
+                .catch(error => console.error(error));
+        }
+    </script>
 
     <div class="page-heading-1">
         <h1>Dashboard</h1>
@@ -25,40 +41,42 @@
             </div>
 
             <div class="patient-card">
-                <div class="patient-card-label">
-                    <h3>Reminders</h3>
-                </div>
-                <div class="patient-card-content">
-                    <p>G'Day, {{ $name }},
-                        Today you need to:</p>
-                    <ul>
-                        <br>
-                        <li>Enter your blood glucose level</li>
-                        <br>
-                        <li>Enter your weight</li>
-                        <br>
-                        <li>Enter step count</li>
-                        <br>
-                        <li>Enter your insulin doses</li>
-                        <br>
-                    </ul>
-                    <a href="/patientRecord">Record measurements</a>
-                </div>
+                @if ($measurement === null)
+                    <div class="patient-card-label">
+                        <h3>Reminders</h3>
+                    </div>
+                    <div class="patient-card-content">
+                        <p>G'Day, {{ $name }},
+                            Today you need to:</p>
+                        <ul>
+                            <br>
+                            <li>Enter your blood glucose level</li>
+                            <br>
+                            <li>Enter your weight</li>
+                            <br>
+                            <li>Enter step count</li>
+                            <br>
+                            <li>Enter your insulin doses</li>
+                            <br>
+                        </ul>
+                        <a href="/patientRecord">Record measurements</a>
+                    </div>
+                @endif
             </div>
 
             @if (!$doctor_id)
                 <div class="patient-card">
                     <div class="patient-card-label">
-                        <h3>Messages</h3>
+                        <h3>Welcome 🙋‍♂️</h3>
                     </div>
                     <div class="patient-card-content">
-                        <div class="msg-bubble msg-bubble-left">
+                        {{-- <div class="msg-bubble msg-bubble-left">
                             <i>- Dr.</i>
-                        </div>
+                        </div> --}}
                         <div class="msg-bubble msg-bubble-left">
-                            <p>Hello Patient</p>
+                            <p> <i> Hello {{ session('name') }} </i></p>
                             <br>
-                            <p> Here you will get your notes</p>
+                            <p> Here you will get a message from your doctor 🩺.</p>
                         </div>
                     </div>
                 </div>
@@ -78,6 +96,9 @@
                                 <th>
                                     <p>Email</p>
                                 </th>
+                                <th>
+
+                                </th>
                             </tr>
                             @foreach ($doctors as $doctor)
                                 <?php
@@ -88,14 +109,17 @@
                                 ?>
 
                                 <tr id={{ $random_value }}>
-                                    {{-- <td>{{ $i }}</td> --}}
                                     <td>{{ $doctor->first_name }} </td>
                                     <td>{{ $doctor->email }}</td>
+                                    @if (!$existense)
+                                        <td><button onclick="saveDoctor({{ $doctor->id }})">Send</button></td>
+                                    @endif
+
                                 </tr>
                             @endforeach
                         </table>
                         <div class="">
-                            {{ $doctors->links() }}
+                            {{ $doctors->links('pagination::bootstrap-5') }}
                         </div>
                     </div>
                 </div>
@@ -104,15 +128,16 @@
                     <div class="patient-card-label">
                         <h3>Messages</h3>
                     </div>
-                    <div class="patient-card-content">
+                    <div class="patient-card-content-mbadla">
                         <div class="msg-bubble msg-bubble-left">
                             <i>- Dr.{{ $doctor->first_name }} {{ $doctor->last_name }}</i>
                         </div>
-                        <div class="note-container">
-                            <p>{{ $note->comment }}</p>
-                            <br>
-                            <p>{{ $note->created_at }}</p>
-                        </div>
+                        @if ($patient->supportMessage !== null)
+                            <div class="msg-bubble">
+                                <p>{{ $patient->supportMessage }}</p>
+                                <br>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="patient-card">

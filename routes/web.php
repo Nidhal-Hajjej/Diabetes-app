@@ -46,7 +46,7 @@ Route::get('/signup', function () {
 
 Route::post('/signup', [FormController::class, 'processForm'])->name('signup.processForm');
 
-Route::get('/diabetes', function () {
+Route::get('/aboutDiabetes', function () {
     return view('diabetes');
 });
 

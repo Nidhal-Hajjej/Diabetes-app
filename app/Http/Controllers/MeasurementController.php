@@ -57,8 +57,6 @@ class MeasurementController extends Controller
 
         $measurement->save();
 
-        // Measurement::create($request->all());
-
         return redirect('/patientDashboard');
 
     }

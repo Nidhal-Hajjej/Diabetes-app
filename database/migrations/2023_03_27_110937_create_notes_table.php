@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->nullOnDelete();
             $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->string('color')->default('dark-yellow');
             $table->timestamps();
         });

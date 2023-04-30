@@ -122,4 +122,20 @@ class InvitationController extends Controller
     {
         //
     }
+    public function sendDoctorInvitation($doctor_id, $patient_id)
+    {
+        $test = Invitation::where('doctor_id', $doctor_id)
+        ->where('patient_id', $patient_id)
+        ->first();
+        if(!$test) {
+            $invitation = new Invitation();
+            $invitation->patient_id = $patient_id;
+            $invitation->doctor_id = $doctor_id;
+            $invitation->save();
+            return response()->json(['message' => 'invitation sent successfully'], 200);
+        } else {
+            return response()->json(['message' => 'invitation already sent'], 400);
+        }
+
+    }
 }

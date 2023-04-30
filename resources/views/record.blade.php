@@ -75,7 +75,7 @@
     </div> --}}
 
     <div class="record-container">
-        <h2>Input your recorded blood glucose level for today</h2>
+        <h2>Input your measurements for today</h2>
         <div class="record-form">
             <form action="/storeMeasurements" method="post">
                 @csrf
