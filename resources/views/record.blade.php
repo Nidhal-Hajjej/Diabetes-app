@@ -1,16 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <script src="../scripts/recordInput.js"></script>
-    <script src="../scripts/closeFlash.js"></script>
-    <script src="../scripts/loader.js"></script>
-    <script src="/scripts/backToTop.js"></script>
-
-    {{-- <div class="loader-wrapper" id="loader">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div> --}}
-
-    {{-- {{#if loggedIn}} --}}
     <div class="page-heading-1">
         <h1>Record</h1>
         <hr class="divider">
@@ -31,7 +21,6 @@
     <div class="requirement-section">
         <div class="checklist-container">
             <h3>Today's required measurements</h3>
-
             <div class="requirement-checklist-item">
                 <p>blood glucose level</p>
                 <img src="../images/icons/checked-2.svg" alt="circle">
@@ -40,7 +29,6 @@
                 <p>weight</p>
                 <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-
             <div class="requirement-checklist-item">
                 <p>exercise</p>
                 <img src="../images/icons/checked-2.svg" alt="circle">
@@ -49,7 +37,6 @@
                 <p>insulin doses</p>
                 <img src="../images/icons/checked-2.svg" alt="circle">
             </div>
-
         </div>
     </div>
 

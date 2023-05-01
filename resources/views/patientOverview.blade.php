@@ -1,14 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    {{-- {{#if loggedIn}}
-    {{> flashSuccess}}
-    {{> flashError}}
-
-    {{> patientDrilldown}} --}}
-
-    {{-- {{!-- all data code: has charts, and table with filters to filter the data --}}
-    {{-- <input type="hidden" id="pd-dates" value="{{json groupedByDate}}" > --}}
     <div class="overview-container">
         <section class="data-table flex-column-center">
             <div class="chart-toggle-container">
@@ -123,9 +115,30 @@
 
             </div>
 
+            <br>
+            <br>
+
+            <div class="patient-data-filters" style="margin-top: 6em;width:150em;padding:3em;height:40em">
+                <div class="checklist-container">
+                    <h3>Send a Support message</h3>
+                    <br>
+                    <br>
+                    <form action="/sendSupportMessage/{{ $id }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <textarea name="supportMessage" id="supportMessage" cols="50" rows="6" placeholder="Enter your message here"
+                            required style="display: block;
+                            margin:auto">
+                        </textarea>
+                        <br>
+                        <br>
+                        <button class="record-button" style="width:10em"> <i> Send </i> </button>
+                    </form>
+                </div>
+            </div>
 
         </section>
-        @if ($note !== null)
+        @if ($notes !== null)
             <section class="patient-notes flex-column-center">
                 <div class="notes-table">
                     <h1>Notes</h1>
@@ -159,10 +172,9 @@
                     </div>
                     <form action="{{ route('notes.store') }}" method="post">
                         @csrf
-                        {{-- <form action="/clinician/manage-patient/{{patient._id}}/add-note" method="post">   --}}
-                        <input type="hidden" value=name="pid">
-                        {{-- <input type="hidden" value={{patient._id}} name="pid"> --}}
-                        <input type="hidden" name="notecolor" id="note-color" value="dark-yellow">
+                        <input type="hidden" value="{{ $id }}" name="patient_id" id="patient_id">
+
+                        <input type="hidden" name="color" id="color" value="dark-yellow">
                         <div class="comment-input">
                             <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
                         </div>
@@ -171,10 +183,10 @@
                 </div>
 
                 <div class="info">
-                    <img src="/images/icons/info.svg" alt="info-sign">
+                    {{-- <img src="/images/icons/info.svg" alt="info-sign">
                     <span class="info-text">
                         Click on the note icon beside a measurement to copy to notes instantly.
-                    </span>
+                    </span> --}}
                 </div>
             </section>
         @endif

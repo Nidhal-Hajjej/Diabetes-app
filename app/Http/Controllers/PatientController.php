@@ -117,9 +117,15 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'supportMessage' => 'required|max:255'
+        ]);
+
+        Patient::whereId($id)->update($validatedData);
+
+        return redirect()->back()->with('success', 'Support message was successfully updated');
     }
 
     /**

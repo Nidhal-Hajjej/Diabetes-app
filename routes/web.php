@@ -117,3 +117,5 @@ Route::resource('/addNewPatient', InvitationController::class);
 
 Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
 Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
+
+Route::patch('/sendSupportMessage/{patient_id}', [PatientController::class, 'update']);
