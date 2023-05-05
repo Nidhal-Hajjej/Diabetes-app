@@ -3,19 +3,19 @@
 @section('content')
     <div class="overview-container">
         <section class="data-table flex-column-center">
-            <div class="chart-toggle-container">
+            <div style="background-color: white" class="chart-toggle-container">
                 <h3>Filter chart by</h3>
                 <div class="chart-toggles">
 
                     <button id="bcg-toggle" class="active-toggle" onclick="getTheWantedChart('bloodLevel')">Blood Glucose
                         Level</button>
 
-                    <button id="insulin-toggle" class="inactive-toggle"
+                    <button id="insulin-toggle" class="active-toggle"
                         onclick="getTheWantedChart('insulinDoses')">Insulin</button>
 
-                    <button id="weight-toggle" class="inactive-toggle" onclick="getTheWantedChart('weight')">Weight</button>
+                    <button id="weight-toggle" class="active-toggle" onclick="getTheWantedChart('weight')">Weight</button>
 
-                    <button id="exercise-toggle" class="inactive-toggle"
+                    <button id="exercise-toggle" class="active-toggle"
                         onclick="getTheWantedChart('exercise')">Exercise</button>
 
                 </div>
@@ -176,7 +176,7 @@
 
                         <input type="hidden" name="color" id="color" value="dark-yellow">
                         <div class="comment-input">
-                            <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
+                            <textarea style="max-width:300px" name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
                         </div>
                         <button class="record-button">Add note</button>
                     </form>

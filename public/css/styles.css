@@ -47,6 +47,14 @@ body {
 html {
     box-sizing: border-box;
 }
+div a{
+    font-size: 15px;
+    color:rgba(5, 85, 142, 1);
+    /* background-color:rgba(5, 85, 142, 1); */
+    padding: 5px;
+    border-radius: 100px;
+    margin-top: 10px;
+}
 
 *,
 *:before,
@@ -79,7 +87,21 @@ button {
     cursor: pointer;
     border-radius: 999em;
 }
-
+.ai-button {
+    font-family: var(--font-family-body);
+    font-weight: 600;
+    font-size: var(--text-p);
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: var(--colour-h1);
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 999em;
+}
 .page-heading h1 {
     font-size: var(--text-h1);
     color: white;
@@ -122,11 +144,12 @@ button {
     width: 50%;
     height: 300px;
     border-radius: var(--curved_corners);
-    overflow: auto;
+
     margin: 0 auto;
     /* margin-left: auto;   
     margin-right: auto; */
 }
+
 
 .filler-image {
     display: flex;
@@ -333,7 +356,7 @@ button {
 }
 
 .card {
-    width: 500px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -342,28 +365,30 @@ button {
     background-color: var(--colour-h1);
     text-align: center;
     padding: 25px;
-    margin: 25px;
+    margin: 5px;
 }
 
 .card img {
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     margin-bottom: 25px;
 }
 
 .card h3 {
     font-size: var(--text-h3);
+    text-align: center;
 }
 
 .card p {
     font-size: var(--text-p);
     font-weight: 300;
-    width: 50%;
-
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 100%;
+    text-align: center;
+    /* margin-left: 25%;
+    margin-right: 25%; */
     margin-top: 10px;
+    padding: 5px;
 }
 
 .card p:nth-child(-n + 3) {
@@ -509,7 +534,22 @@ textarea {
     justify-content: space-around;
     align-items: center;
 }
+.second-section lottie-player {
+    width: 750px;
+    height: 750px;
+    margin-right: -50px;
+    margin-left: -300px;
+    
+}
 
+.second-section {
+    height: 60vh;
+    background-color: rgb(4, 84, 141);
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
 .hero-text button {
     font-size: var(--text-h3);
 }
@@ -524,6 +564,47 @@ textarea {
     font-weight: 400;
     color: var(--colour-h1);
     margin-bottom: 20px;
+}
+
+.second-text button {
+    font-size: var(--text-h3);
+    background-color: #b7daeb;
+    color: rgb(4, 84, 141);
+}
+
+.second-text h1 {
+    font-size: var(--text-h1);
+    color: rgb(255, 255, 255);
+}
+
+.second-text h2 {
+    font-size: var(--text-h2);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.first-sect-header {
+    background-color: var(--colour-background-teal);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 0 2000px rgba(14, 13, 13, 0.452);
+    padding-top: 5em;
+    padding-bottom: 15em;
+}
+.first-sect-header h1 {
+    font-size: var(--text-h1);
+    color: white;
+    text-align: right;
+    padding: 35px 200px;
+}
+
+.first-sect-header button {
+    font-weight: 500;
+    font-size: 30px;
+    position: absolute;
+    right: 200px;
 }
 
 .sect-header {
@@ -671,7 +752,7 @@ textarea {
 }
 
 .checklist-container {
-    background-color: rgba(128, 128, 128, 0.568);
+    background-color: rgb(255, 255, 255);
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -767,6 +848,7 @@ textarea {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 }
 
 .record-container h2 {
@@ -782,10 +864,16 @@ textarea {
     align-items: center;
     justify-content: center;
     padding: 25px;
+    width: 900px;
 }
 
 .record-form span {
     font-size: var(--text-p);
+}
+
+.record-form input {
+    min-width: 350px;
+    
 }
 
 .type-input {
@@ -1391,18 +1479,53 @@ a {
     font-size: var(--text-h3);
     color: var(--colour-background);
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .pagination ol{
+    color: #00ff26;
+  }
+  .pagination a{
+    color: #00ff26;
+  }
+  
+  .pagination .page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 6px 12px;
+    border-radius: 0.25rem;
+  }
+  
+  .pagination .page-link:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
 
 .patient-card-content {
     background-color: var(--colour-background-teal);
     color: var(--colour-text);
     border-radius: 10%;
-    height: 20em;
-    width: 25em;
+    height: 30em;
+    width: 30em;
     padding: 5%;
+    margin: 10px;
     font-size: var(--text-p);
-    margin-top: -15%;
+    margin-top: -10%;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .patient-card-content-mbadla {
@@ -1502,11 +1625,11 @@ td {
 }
 
 .leaderboard #first {
-    background-color: var(--colour-first);
+    background-color: rgb(129, 177, 255);
 }
 
 .leaderboard #second {
-    background-color: var(--colour-second);
+    background-color: rgb(93, 230, 191);
 }
 
 .leaderboard #third {
@@ -1858,6 +1981,7 @@ td {
 .active-toggle {
     color: var(--colour-background);
     background-color: var(--colour-h1);
+    
 }
 
 /* Loading Screen */
@@ -2765,3 +2889,61 @@ button {
     margin-left: auto;
     margin-right: auto;
 }
+
+.record-form {
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .type-input {
+    margin-top: 10px;
+  }
+  
+  .record-input {
+    margin-bottom: 10px;
+  }
+  
+  .record-input input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+  
+  .record-input input:focus {
+    outline: none;
+    border-color: var(--colour-primary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .record-button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #B9DAEB;
+    color: #013A63;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+  
+  .record-button:hover {
+    background-color: white;
+  }

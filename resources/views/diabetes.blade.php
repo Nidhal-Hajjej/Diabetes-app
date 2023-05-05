@@ -64,14 +64,7 @@
         </div>   
     </section>
 
-    <section class="learn-more">
-        <h2>Learn More</h2>
-    <ul>
-        <li><u><a href="https://www.cdc.gov/diabetes/basics/risk-factors.html">Diabetes Risk Factors</a></u></li>
-        <li><u><a href="https://www.cdc.gov/diabetes/basics/symptoms.html">Diabetes Symptoms</a></u></li>
-        <li><u><a href="https://www.cdc.gov/diabetes/managing/index.html">Living with Diabetes</a></u></li>    
-    </ul>
-    </section>
+    
 @endsection
 
 
