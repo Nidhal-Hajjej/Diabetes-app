@@ -93,6 +93,20 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        // 'fallback' => [
+        //     'driver' => 'mysql',
+        //     'host' => env('DB_FALLBACK_HOST', '127.0.0.1'),
+        //     'port' => env('DB_FALLBACK_PORT', '3306'),
+        //     'database' => env('DB_FALLBACK_DATABASE', 'fallback_db'),
+        //     'username' => env('DB_FALLBACK_USERNAME', 'root'),
+        //     'password' => env('DB_FALLBACK_PASSWORD', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => true,
+        //     'engine' => null,
+        // ],
+
     ],
 
     /*

@@ -17,3 +17,4 @@ predictionSystem/project
 /.fleet
 /.idea
 /.vscode
+/mysql_data
