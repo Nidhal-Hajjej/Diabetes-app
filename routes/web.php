@@ -117,3 +117,14 @@ Route::resource('/addNewPatient', InvitationController::class);
 
 Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
 Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
+
+
+Route::get('/prediction', function () {
+    return view('prediction');
+});
+Route::get('/chatbot', function () {
+    return view('chatbot');
+});
+Route::get('/diet', function () {
+    return view('diet');
+});
