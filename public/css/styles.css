@@ -1524,7 +1524,7 @@ a {
     margin-top: -10%;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -1606,6 +1606,9 @@ a {
 .leaderboard th,
 td {
     border: 0px;
+    padding: 5px;
+    min-width: 150px;
+    
 }
 
 .leaderboard th p {

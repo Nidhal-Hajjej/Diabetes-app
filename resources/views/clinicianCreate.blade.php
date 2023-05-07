@@ -14,8 +14,7 @@
                     <lottie-player id="clinician-lottie" src="https://assets6.lottiefiles.com/packages/lf20_ibbakwps.json"
                         background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
-                <button type="clinician-button" id="clinician-button"><a href="/clinician/create">Add New
-                        Patient</a></button>
+                
                 <button type="clinician-button" id="clinician-button"><a href="/clinicianAccount">Manage Your
                         Account</a></button>
             </div>
@@ -23,7 +22,7 @@
 
         <div class="patient-card ">
             <div class="patient-card-label">
-                <h3>Leaderboard</h3>
+                <h3>Invitations</h3>
             </div>
             <div class="patient-card-content">
                 <table class="leaderboard" style="width:300px;">
@@ -32,12 +31,12 @@
                             <p>Position</p>
                         </th>
                         <th>
-                            <p>patient_id</p>
+                            <p>Name</p>
                         </th>
                         <th>
                             <p>Date of Birth</p>
                         </th>
-                        <th>
+                        <th style="width: 100px">
                             <p>Accept/Deny</p>
                         </th>
 
@@ -52,16 +51,18 @@
                         ?>
                         <tr id={{ $random_value }}>
                             <td>{{ $position }}</td>
-                            <td>{{ $invitation->patient_id }}</td>
+                            <td>{{ $invitation->first_name }} {{ $invitation->last_name }}</td>
                             <td>{{ $invitation->dob }}</td>
-                            <form action="{{ route('invitation.accept', $invitation->id) }}" method="POST">
-                                @csrf
-                                <td><button type="submit">Accept</button></td>
-                            </form>
-                            <form action="{{ route('invitation.deny', $invitation->id) }}" method="POST">
-                                @csrf
-                                <td><button type="submit">Deny</button></td>
-                            </form>
+                            <td>
+                                <form action="{{ route('invitation.accept', $invitation->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">Accept</button>
+                                </form>
+                                <form action="{{ route('invitation.deny', $invitation->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">Deny</button>
+                                </form>
+                            </td>
                         </tr>
                         @php($position++)
                     @endforeach

@@ -176,7 +176,7 @@
 
                         <input type="hidden" name="color" id="color" value="dark-yellow">
                         <div class="comment-input">
-                            <textarea style="max-width:300px" name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
+                            <textarea style="max-width:300px; min-width:300px;" name="comment" id="comment" cols="30" rows="5" placeholder="Enter note here" required></textarea>
                         </div>
                         <button class="record-button">Add note</button>
                     </form>
