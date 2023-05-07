@@ -46,7 +46,7 @@ Route::get('/signup', function () {
 
 Route::post('/signup', [FormController::class, 'processForm'])->name('signup.processForm');
 
-Route::get('/diabetes', function () {
+Route::get('/aboutDiabetes', function () {
     return view('diabetes');
 });
 
@@ -118,6 +118,7 @@ Route::resource('/addNewPatient', InvitationController::class);
 Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
 Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
 
+<<<<<<< HEAD
 
 Route::get('/prediction', function () {
     return view('prediction');
@@ -127,4 +128,10 @@ Route::get('/chatbot', function () {
 });
 Route::get('/diet', function () {
     return view('diet');
+=======
+Route::patch('/sendSupportMessage/{patient_id}', [PatientController::class, 'update']);
+
+Route::get('/prediction', function () {
+    return view('prediction');
+>>>>>>> d4d8c9224fc4cb51b93a10296fe2035517ab2041
 });

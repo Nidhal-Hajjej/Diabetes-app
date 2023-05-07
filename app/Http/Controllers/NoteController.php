@@ -58,9 +58,19 @@ class NoteController extends Controller
             'comment' => 'required',
         ]);
 
+        $input = $request->all();
+
+        // $note = new Note();
+        // $note->patient_id = $input["patient_id"];
+        // $note->comment = $input["comment"];
+        // $note->color = $input["color"];
+        // dd($note);
+
+        // $note->save();
+
         Note::create($request->all());
 
-        return redirect()->route('notes.index');
+        return redirect()->back();
     }
 
     /**
@@ -76,6 +86,7 @@ class NoteController extends Controller
 
         return view('patientOverview', compact('notes', 'id'));
     }
+
     public function getChartData($id, $attribut)
     {
         // $users = Measurement::select(DB::raw("$attribut as count"), DB::raw("DAYNAME(created_at) as day_name"))
@@ -128,7 +139,7 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

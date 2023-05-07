@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Measurement;
+use App\Models\Invitation;
 use App\Models\Note;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 
 class PatientController extends Controller
 {
@@ -28,12 +30,22 @@ class PatientController extends Controller
         $doctor_id= Patient::where('id', $patient_id)->value('doctor_id');
         $doctor = Doctor::where('id', $doctor_id)->first();
 
+        $patient = Patient::where('id', $patient_id)->first();
+
+        $measurement = Measurement::where('patient_id', $patient_id)
+                    ->whereDate('created_at', Carbon::today())
+                    ->first();
+
         $note = Note::where('patient_id', $patient_id)->latest('created_at')->first();
-        // dd($note);
 
         $doctors = Doctor::paginate(5);
-
-        return view("patientDashboard", compact('name', 'doctor_id', 'doctor', 'note', 'doctors'));
+        $test = Invitation::where('patient_id', $patient_id)
+        ->first();
+        $existense = false;
+        if($test) {
+            $existense = true;
+        }
+        return view("patientDashboard", compact('name', 'doctor_id', 'doctor', 'patient', 'doctors', 'measurement', 'existense'));
     }
     public function updatePassword(Request $request)
     {
@@ -105,9 +117,15 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'supportMessage' => 'required|max:255'
+        ]);
+
+        Patient::whereId($id)->update($validatedData);
+
+        return redirect()->back()->with('success', 'Support message was successfully updated');
     }
 
     /**

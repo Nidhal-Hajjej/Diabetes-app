@@ -36,33 +36,30 @@ class FormController extends Controller
         $user->password = Hash::make($validatedData['password']);
         $user->save();
 
-if ($role === 'patient') {
-    // Save data to the patients table
-    $patient = new Patient;
-    $patient->first_name = $validatedData['first_name'];
-    $patient->last_name = $validatedData['last_name'];
-    $patient->email = $validatedData['email'];
-    $patient->password = Hash::make($validatedData['password']);
-    $patient->screen_name = '';
-    $patient->dob = date('Y-m-d', mt_rand(strtotime('1970-01-01'), strtotime('2005-12-31')));
-    $patient->bio = '';
-    
-    $patient->doctor_id = mt_rand(1, 10);
-    $patient->supportMessage = '';
-    $patient->measurements = null;
-    $patient->save();
-} else {
-    // Save data to the doctors table
-    $doctor = new Doctor;
-    $doctor->first_name = $validatedData['first_name'];
-    $doctor->last_name = $validatedData['last_name'];
-    $doctor->email = $validatedData['email'];
-    $doctor->password = Hash::make($validatedData['password']);
-    $doctor->screen_name = null;
-    $doctor->dob = null;
-    
-    $doctor->save();
-}
+        if ($role === 'patient') {
+            // Save data to the patients table
+            $patient = new Patient();
+            $patient->first_name = $validatedData['first_name'];
+            $patient->last_name = $validatedData['last_name'];
+            $patient->email = $validatedData['email'];
+            $patient->password = Hash::make($validatedData['password']);
+            $patient->screen_name = '';
+            $patient->dob = date('Y-m-d', mt_rand(strtotime('1970-01-01'), strtotime('2005-12-31')));
+            $patient->bio = '';
+            $patient->supportMessage = '';
+            $patient->save();
+        } else {
+            // Save data to the doctors table
+            $doctor = new Doctor();
+            $doctor->first_name = $validatedData['first_name'];
+            $doctor->last_name = $validatedData['last_name'];
+            $doctor->email = $validatedData['email'];
+            $doctor->password = Hash::make($validatedData['password']);
+            $doctor->screen_name = null;
+            $doctor->dob = null;
+
+            $doctor->save();
+        }
 
         // Redirect back to the form with a success message
         return redirect('/login')->with('success', 'Form submitted successfully!');

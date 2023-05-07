@@ -42,10 +42,10 @@
             </table>
 
             <div class="info">
-                <img src="../images/icons/info.svg" alt="info-sign">
+                {{-- <img src="../images/icons/info.svg" alt="info-sign">
                 <span class="info-text">
                     Greyed-out fields: non-required measurements.
-                </span>
+                </span> --}}
             </div>
 
         </div>
