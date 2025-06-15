@@ -13,7 +13,9 @@ Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
-predictionSystem/project
+predictionSystem
+Diet_recommendation_system
+Chatbot+Whisper
 /.fleet
 /.idea
 /.vscode
