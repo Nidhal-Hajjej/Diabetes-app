@@ -102,7 +102,7 @@
                             </tr>
                             @foreach ($doctors as $doctor)
                                 <?php
-                                $my_array = ['first', 'second', 'third', 'fourth', 'fifth'];
+                                $my_array = ['first', 'second'];
                                 $random_key = array_rand($my_array);
                                 $random_value = $my_array[$random_key];
                                 $i = 0;
@@ -118,8 +118,46 @@
                                 </tr>
                             @endforeach
                         </table>
-                        <div class="">
+                        {{-- <div class="pagination">
                             {{ $doctors->links('pagination::bootstrap-5') }}
+                        </div> --}}
+                        <div class="pagination">
+                            <ol class="pagination justify-content-center">
+                                <!-- Previous Page Link -->
+                                @if ($doctors->onFirstPage())
+                                    <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                                        <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                    </li>
+                                @else
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $doctors->previousPageUrl() }}" rel="prev"
+                                            aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                    </li>
+                                @endif
+
+                                <!-- Pagination Elements -->
+                                @for ($i = 1; $i <= $doctors->lastPage(); $i++)
+                                    <li class="page-item {{ $doctors->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $doctors->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+
+                                <!-- Next Page Link -->
+                                @if ($doctors->hasMorePages())
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $doctors->nextPageUrl() }}" rel="next"
+                                            aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                                        <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                                    </li>
+                                @endif
+                            </ol>
+                            <div style="padding-left:15px" class="text-center mt-3">
+                                <br> Showing {{ $doctors->firstItem() }} to {{ $doctors->lastItem() }} of
+                                {{ $doctors->total() }} results
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,6 +205,29 @@
                 </div>
             @endif
         </section>
+        
+    <div class="second-section">
+        <div class="second-text">
+            <h1 style="color: rgb(255, 255, 255)">Managing Diabetes is difficult.</h1>
+            <h2>Our app makes it easy.</h2>
+            <form action="/chatbot">
+                <button type="submit" class="ai-button">
+                    ChatBot
+                </button>
+            </form>
+            <form action="/diet">
+                <button type="submit" class="ai-button">
+                    Diet Generation System
+                </button>
+            </form>
+            {{-- {{/if}} --}}
+        </div>
+
+        <div class="hero-image">
+            <lottie-player id="hero-lottie" src="https://assets5.lottiefiles.com/packages/lf20_8q9oPD.json"
+                background="transparent" speed="1" loop autoplay></lottie-player>
+        </div>
+    </div>
     </section>
 
     {{-- {{else}}

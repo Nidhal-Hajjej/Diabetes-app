@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
     <div class="page-heading" style="background-image: url('../images/header-img-3.jpg');">
         <h1>About This Website</h1>
     </div>
@@ -53,44 +55,80 @@
         </p>
         <div class="team-container">
             <div class="card">
-                <img src="/images/Kian.jpg">
+                <img src="/images/louay.jpg">
                 <div class="card-text">
                     <h3>Chaabane Louay</h3>
-                    <p>Developer</p>
-                    <p>kiandsouza@me.com</p>
-                    <p>I am Kian, a marketing technology enthusiast and I love walking my imaginary dog.</p>
+                    <p>Graphic Designer & Developer</p>
+                    <p>louaychaabane00@gmail.com</p>
+                    <br>
+                    <!-- Facebook icon -->
+                    <a href="https://www.facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <!-- Instagram icon -->
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-linkedin fa-2x"
+                            style="font-size: 2em; color:white;"></i></a>
+                    {{-- <p>I am Kian, a marketing technology enthusiast and I love walking my imaginary dog.</p> --}}
                 </div>
             </div>
 
             <div class="card">
-                <img src="/images/Sans.jpg">
+                <img src="/images/ahmed.jpg">
                 <div class="card-text">
                     <h3>Ghliss Ahmed</h3>
                     <p>Developer</p>
-                    <p>sanskar@me.com</p>
-                    <p>My name is Sanskar and I am interested in software development, watching soccer (Manchester United)
-                        and listening to music</p>
+                    <p>ahmedghliss25@gmail.com </p>
+                    <br>
+                    <!-- Facebook icon -->
+                    <a href="https://www.facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <!-- Instagram icon -->
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-linkedin fa-2x"
+                            style="font-size: 2em; color:white;"></i></a>
+                    {{-- <p>My name is Sanskar and I am interested in software development, watching soccer (Manchester United)
+                        and listening to music</p> --}}
                 </div>
             </div>
 
             <div class="card">
-                <img src="/images/sean-pic.jpg">
+                <img src="/images/nidhal.jpg">
                 <div class="card-text">
                     <h3>Hajjej Nidhal</h3>
                     <p>Developer</p>
-                    <p>seantan@me.com</p>
-                    <p>I am Yi Sheon, but you can call me Sean. My interests include software development and playing the
-                        guitar.</p>
+                    <p>nidhalhj16@gmail.com </p>
+                    <br>
+                    <!-- Facebook icon -->
+                    <a href="https://www.facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <!-- Instagram icon -->
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-linkedin fa-2x"
+                            style="font-size: 2em; color:white;"></i></a>
+                    {{-- <p>I am Yi Sheon, but you can call me Sean. My interests include software development and playing the
+                        guitar.</p> --}}
                 </div>
             </div>
 
             <div class="card">
-                <img src="/images/Anh.jpg">
+                <img src="/images/ghassen.jpg">
                 <div class="card-text">
                     <h3>Fouda Ghassen</h3>
                     <p>Developer</p>
-                    <p>anhpham@me.com</p>
-                    <p>I am Anh. Grab me when you want to try out a new foodie place or kdrama!</p>
+                    <p>ghassenfouda@yahoo.com </p>
+                    <br>
+                    <!-- Facebook icon -->
+                    <a href="https://www.facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <!-- Instagram icon -->
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"
+                            style="font-size: 2em; color:white;"></i></a>
+                    <a href="https://www.instagram.com/yourpage" target="_blank"><i class="fab fa-linkedin fa-2x"
+                            style="font-size: 2em; color:white;"></i></a>
+                    {{-- <p>I am Anh. Grab me when you want to try out a new foodie place or kdrama!</p> --}}
                 </div>
             </div>
 

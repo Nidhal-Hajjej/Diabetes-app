@@ -7,7 +7,7 @@
         <h2>
             Hello,
             {{-- {{singlePatient.first_name}}.  --}}
-            It is now
+            It's now 
             {{-- {{currentTime}}. --}}
         </h2>
         <h2>

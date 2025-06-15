@@ -29,7 +29,7 @@ class InvitationController extends Controller
         $invitations = DB::table('invitations')
                     ->join('patients', 'invitations.patient_id', '=', 'patients.id')
                     ->where('invitations.doctor_id', $doctor_id)
-                    ->select('invitations.id', 'invitations.patient_id', 'patients.dob', 'patients.bio')
+                    ->select('invitations.id', 'patients.first_name', 'patients.last_name', 'patients.dob', 'patients.bio')
                     ->get();
 
         // $invitations = Invitation::all();

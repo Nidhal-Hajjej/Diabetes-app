@@ -119,3 +119,7 @@ Route::post('/invitation/accept/{invitation}', [InvitationController::class, 'ac
 Route::post('/invitation/deny/{invitation}', [InvitationController::class, 'deny'])->name('invitation.deny');
 
 Route::patch('/sendSupportMessage/{patient_id}', [PatientController::class, 'update']);
+
+Route::get('/prediction', function () {
+    return view('prediction');
+});
